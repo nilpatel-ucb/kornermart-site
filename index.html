@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KornerMart — Fuel, Snacks & Smiles on Every Korner</title>
+<meta name="description" content="KornerMart is a family-run chain of clean, friendly gas stations and convenience stores across the Inland Empire — Corona, Eastvale, Norco, Riverside & Ontario.">
+<link rel="icon" type="image/jpeg" href="km-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1B75BC;
+  --sky:#2FA8E1;
+  --red:#E31E26;
+  --red-deep:#A50E14;
+  --ink:#0B2540;
+  --ink-soft:#4A6580;
+  --ice:#F2F8FD;
+  --white:#FFFFFF;
+  --radius:28px;
+  --shadow:0 20px 50px -20px rgba(11,37,64,.18);
+  --font-display:'Sora',sans-serif;
+  --font-body:'Instrument Sans',sans-serif;
+  --font-num:'Space Grotesk',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--white);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+::selection{background:var(--sky);color:#fff}
+
+/* ---------- bubbles canvas ---------- */
+#bubbles{
+  position:fixed;inset:0;
+  width:100%;height:100%;
+  z-index:0;
+  pointer-events:none;
+}
+main,header,footer{position:relative;z-index:1}
+
+/* ---------- nav ---------- */
+header{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  width:min(1120px,calc(100% - 32px));
+  z-index:50;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(27,117,188,.12);
+  border-radius:999px;
+  box-shadow:0 8px 30px -12px rgba(11,37,64,.15);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px 10px 20px;
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:38px;width:auto;display:block}
+.brand span{font-family:var(--font-display);font-weight:800;font-size:17px;color:var(--ink);letter-spacing:.02em}
+.brand span b{color:var(--blue);font-weight:800}
+nav{display:flex;align-items:center;gap:4px}
+nav a{
+  text-decoration:none;color:var(--ink-soft);
+  font-weight:600;font-size:14.5px;
+  padding:9px 14px;border-radius:999px;
+  transition:color .2s,background .2s;
+}
+nav a:hover{color:var(--blue);background:var(--ice)}
+nav a.cta{
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  color:#fff;margin-left:6px;
+  box-shadow:0 6px 18px -6px rgba(27,117,188,.55);
+}
+nav a.cta:hover{filter:brightness(1.08);color:#fff}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;transition:.3s}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;
+  padding:140px 24px 80px;
+  position:relative;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);
+  background:var(--ice);
+  border:1px solid rgba(27,117,188,.15);
+  padding:8px 18px;border-radius:999px;
+  margin-bottom:28px;
+}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+h1{
+  font-family:var(--font-display);
+  font-weight:800;
+  font-size:clamp(42px,7.2vw,84px);
+  line-height:1.04;
+  letter-spacing:-.02em;
+  max-width:14ch;
+}
+h1 .grad-blue{background:linear-gradient(120deg,var(--blue),var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .grad-red{background:linear-gradient(120deg,var(--red),var(--red-deep));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:52ch;color:var(--ink-soft);font-size:18px;margin:24px 0 36px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn{
+  font-family:var(--font-body);font-weight:600;font-size:16px;
+  padding:15px 30px;border-radius:999px;border:none;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  transition:transform .2s,box-shadow .2s,filter .2s;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{
+  background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;
+  box-shadow:0 12px 30px -8px rgba(27,117,188,.55);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 38px -8px rgba(27,117,188,.6)}
+.btn-ghost{
+  background:#fff;color:var(--ink);
+  border:1.5px solid rgba(11,37,64,.14);
+}
+.btn-ghost:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+
+/* fuel board */
+.fuel-board{
+  margin-top:64px;
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+}
+.fuel-chip{
+  background:rgba(255,255,255,.8);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(27,117,188,.14);
+  border-radius:22px;
+  padding:16px 26px;
+  min-width:150px;
+  box-shadow:var(--shadow);
+  transition:transform .25s,border-color .25s;
+}
+.fuel-chip:hover{transform:translateY(-5px);border-color:var(--sky)}
+.fuel-chip .grade{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.fuel-chip .price{font-family:var(--font-num);font-weight:700;font-size:30px;color:var(--blue);line-height:1.2}
+.fuel-chip .price sup{font-size:.5em;color:var(--red)}
+.fuel-chip.diesel .price{color:var(--red)}
+.fuel-note{margin-top:14px;font-size:12.5px;color:var(--ink-soft)}
+
+.scroll-hint{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  color:var(--ink-soft);font-size:12px;letter-spacing:.15em;text-transform:uppercase;
+  animation:bob 2.4s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ---------- shared section styles ---------- */
+section{padding:110px 24px;position:relative}
+.wrap{max-width:1120px;margin:0 auto}
+.sec-eyebrow{
+  font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:10px;
+}
+.sec-eyebrow::before{content:"";width:26px;height:2px;background:var(--red);border-radius:2px}
+h2{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(30px,4.4vw,50px);letter-spacing:-.02em;line-height:1.1;
+  margin-bottom:18px;
+}
+.lead{color:var(--ink-soft);font-size:17.5px;max-width:58ch}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- who we are ---------- */
+#about{background:transparent}
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:38px}
+.stat{
+  background:var(--ice);border-radius:22px;padding:22px 18px;
+  border:1px solid rgba(27,117,188,.1);
+  transition:transform .25s;
+}
+.stat:hover{transform:translateY(-4px)}
+.stat b{font-family:var(--font-num);font-size:30px;color:var(--blue);display:block;line-height:1.15}
+.stat span{font-size:13.5px;color:var(--ink-soft);font-weight:500}
+.about-visual{
+  position:relative;border-radius:36px;overflow:hidden;
+  background:linear-gradient(160deg,var(--blue) 0%,var(--sky) 55%,#7CC8EE 100%);
+  min-height:440px;box-shadow:var(--shadow);
+  display:flex;align-items:center;justify-content:center;
+}
+.about-visual img{width:62%;max-width:340px;background:#fff;border-radius:28px;padding:28px;box-shadow:0 26px 60px -20px rgba(11,37,64,.45);transform:rotate(-3deg);transition:transform .4s}
+.about-visual:hover img{transform:rotate(0deg) scale(1.03)}
+.about-visual::after{
+  content:"EST. INLAND EMPIRE";
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,.85);font-size:11.5px;letter-spacing:.28em;font-weight:600;
+}
+.values{display:flex;flex-direction:column;gap:14px;margin-top:34px}
+.value{display:flex;gap:14px;align-items:flex-start}
+.value .dot{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:17px;background:var(--ice);border:1px solid rgba(27,117,188,.15)}
+.value h4{font-family:var(--font-display);font-size:16px;font-weight:700;margin-bottom:2px}
+.value p{font-size:14.5px;color:var(--ink-soft)}
+
+/* ---------- locations ---------- */
+#locations{background:var(--ice);border-radius:64px 64px 0 0}
+.loc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:52px}
+.loc-card{
+  background:#fff;border-radius:var(--radius);padding:30px;
+  border:1px solid rgba(27,117,188,.1);
+  box-shadow:0 10px 30px -18px rgba(11,37,64,.15);
+  transition:transform .3s,box-shadow .3s;
+  position:relative;overflow:hidden;
+}
+.loc-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:5px;
+  background:linear-gradient(90deg,var(--blue),var(--sky) 60%,var(--red));
+  transform:scaleX(0);transform-origin:left;transition:transform .35s;
+}
+.loc-card:hover{transform:translateY(-7px);box-shadow:var(--shadow)}
+.loc-card:hover::before{transform:scaleX(1)}
+.loc-city{font-family:var(--font-display);font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:space-between}
+.badge{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.badge.open{background:#E7F6EC;color:#177A3E}
+.badge.new{background:#FDEBEC;color:var(--red)}
+.loc-addr{color:var(--ink-soft);font-size:14.5px;margin:10px 0 16px}
+.amenities{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.amenities span{font-size:12.5px;font-weight:500;background:var(--ice);color:var(--blue);padding:6px 12px;border-radius:999px;border:1px solid rgba(27,117,188,.12)}
+.loc-card a{font-weight:600;font-size:14.5px;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.loc-card a:hover{color:var(--red)}
+.loc-card a::after{content:"→";transition:transform .2s}
+.loc-card a:hover::after{transform:translateX(4px)}
+
+/* ---------- rewards ---------- */
+#rewards{background:var(--ice);padding-top:40px}
+.rewards-head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:52px}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.tier{
+  background:#fff;border-radius:var(--radius);padding:34px 28px;
+  border:1.5px solid rgba(27,117,188,.1);
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+  display:flex;flex-direction:column;
+}
+.tier:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.tier.featured{
+  border-color:var(--blue);
+  background:linear-gradient(165deg,var(--blue),var(--sky));
+  color:#fff;
+  box-shadow:0 24px 55px -18px rgba(27,117,188,.55);
+}
+.tier .t-name{font-family:var(--font-display);font-weight:800;font-size:20px;display:flex;align-items:center;gap:8px}
+.tier .t-per{font-size:13px;opacity:.75;margin-bottom:20px}
+.tier .t-rate{font-family:var(--font-num);font-weight:700;font-size:42px;line-height:1.1}
+.tier .t-rate small{font-size:15px;font-weight:500;font-family:var(--font-body)}
+.tier ul{list-style:none;margin:22px 0 26px;flex:1}
+.tier li{font-size:14.5px;padding:7px 0;display:flex;gap:10px;align-items:flex-start}
+.tier li::before{content:"✓";font-weight:700;color:var(--red)}
+.tier.featured li::before{color:#FFD3D5}
+.tier .btn{justify-content:center;font-size:15px;padding:13px 20px}
+.tier.featured .btn{background:#fff;color:var(--blue)}
+.tier:not(.featured) .btn{background:var(--ice);color:var(--blue)}
+.tier:not(.featured) .btn:hover{background:var(--blue);color:#fff}
+
+/* calculator */
+.calc{
+  margin-top:26px;background:#fff;border-radius:var(--radius);
+  padding:30px;border:1px solid rgba(27,117,188,.1);
+}
+.calc label{font-weight:600;font-size:15px;display:flex;justify-content:space-between;margin-bottom:14px}
+.calc label output{font-family:var(--font-num);color:var(--blue);font-weight:700}
+input[type=range]{
+  width:100%;appearance:none;-webkit-appearance:none;height:8px;border-radius:99px;
+  background:linear-gradient(90deg,var(--blue) var(--fill,30%),#DCEBF7 var(--fill,30%));
+  outline:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:24px;height:24px;border-radius:50%;
+  background:#fff;border:3px solid var(--blue);
+  box-shadow:0 4px 12px rgba(27,117,188,.4);
+}
+input[type=range]:focus-visible{outline:3px solid var(--sky);outline-offset:4px}
+.calc-out{display:flex;gap:28px;margin-top:22px;flex-wrap:wrap}
+.calc-out div b{font-family:var(--font-num);font-size:28px;color:var(--red);display:block;line-height:1.2}
+.calc-out div span{font-size:13px;color:var(--ink-soft)}
+.bubble-score{margin-top:16px;font-size:13px;color:var(--ink-soft)}
+.bubble-score b{color:var(--blue);font-family:var(--font-num)}
+
+/* ---------- careers ---------- */
+#careers{background:var(--white)}
+.careers-top{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:42px}
+.filter{display:flex;gap:8px;flex-wrap:wrap}
+.filter button{
+  border:1.5px solid rgba(11,37,64,.14);background:#fff;color:var(--ink-soft);
+  font-family:var(--font-body);font-weight:600;font-size:13.5px;
+  padding:9px 18px;border-radius:999px;cursor:pointer;transition:.2s;
+}
+.filter button:hover{border-color:var(--blue);color:var(--blue)}
+.filter button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.jobs{display:flex;flex-direction:column;gap:14px}
+.job{
+  background:#fff;border:1px solid rgba(27,117,188,.12);border-radius:22px;
+  overflow:hidden;transition:box-shadow .3s,border-color .3s;
+}
+.job:hover{border-color:var(--sky)}
+.job.open-j{box-shadow:var(--shadow);border-color:var(--blue)}
+.job-head{
+  display:flex;align-items:center;gap:18px;padding:22px 26px;cursor:pointer;
+  background:none;border:none;width:100%;text-align:left;font-family:var(--font-body);
+}
+.job-head:focus-visible{outline:3px solid var(--sky);outline-offset:-3px}
+.job-title{font-family:var(--font-display);font-weight:700;font-size:17.5px;color:var(--ink);flex:1}
+.job-meta{display:flex;gap:8px;flex-wrap:wrap}
+.job-meta span{font-size:12.5px;font-weight:500;background:var(--ice);color:var(--blue);padding:5px 12px;border-radius:999px}
+.job-meta span.pay{background:#FDEBEC;color:var(--red)}
+.chev{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ice);display:grid;place-items:center;color:var(--blue);transition:transform .3s;font-size:14px}
+.job.open-j .chev{transform:rotate(180deg);background:var(--blue);color:#fff}
+.job-body{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.job-body-inner{padding:0 26px 26px;color:var(--ink-soft);font-size:15px}
+.job-body-inner ul{margin:12px 0 20px 18px}
+.job-body-inner li{margin:5px 0}
+.hidden{display:none}
+
+/* ---------- footer ---------- */
+footer{
+  background:var(--ink);color:#B9CCDD;
+  border-radius:64px 64px 0 0;
+  padding:80px 24px 36px;margin-top:40px;
+}
+.foot-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}
+.foot-brand img{height:44px;background:#fff;border-radius:12px;padding:6px;margin-bottom:16px}
+.foot-brand p{font-size:14px;max-width:32ch}
+footer h5{font-family:var(--font-display);color:#fff;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+footer a{display:block;color:#B9CCDD;text-decoration:none;font-size:14.5px;margin:9px 0;transition:color .2s}
+footer a:hover{color:var(--sky)}
+.foot-bottom{max-width:1120px;margin:56px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px}
+.foot-bottom span b{color:var(--red)}
+
+/* ---------- toast ---------- */
+#toast{
+  position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);
+  background:var(--ink);color:#fff;padding:13px 24px;border-radius:999px;
+  font-size:14px;font-weight:500;z-index:99;opacity:0;transition:.4s;pointer-events:none;
+  box-shadow:0 14px 40px rgba(0,0,0,.3);
+}
+#toast.show{transform:translate(-50%,0);opacity:1}
+
+/* ---------- responsive ---------- */
+@media(max-width:920px){
+  .about-grid,.rewards-head{grid-template-columns:1fr;gap:40px}
+  .tiers{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  nav{
+    position:absolute;top:calc(100% + 10px);right:0;
+    flex-direction:column;align-items:stretch;
+    background:#fff;border-radius:24px;padding:12px;
+    border:1px solid rgba(27,117,188,.12);
+    box-shadow:var(--shadow);
+    display:none;min-width:220px;
+  }
+  nav.open{display:flex}
+  nav a{padding:12px 16px}
+  .menu-btn{display:block}
+}
+@media(max-width:560px){
+  section{padding:80px 18px}
+  .about-stats{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero{padding-top:120px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  #bubbles{display:none}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bubbles" aria-hidden="true"></canvas>
+
+<header>
+  <a class="brand" href="#top">
+    <img src="km-logo.jpg" alt="KornerMart logo">
+    <span>KORNER<b>MART</b></span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="nav">
+    <a href="#about">Who We Are</a>
+    <a href="#locations">Locations</a>
+    <a href="#rewards">KM Rewards</a>
+    <a href="#careers">Careers</a>
+    <a class="cta" href="#rewards">Join Rewards</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Now fueling 5 cities across the Inland Empire</div>
+    <h1>Fuel, snacks &amp; <span class="grad-blue">smiles</span> on every <span class="grad-red">korner.</span></h1>
+    <p>KornerMart is your neighborhood stop for quality fuel, clean stores, cold drinks, and the friendliest faces in town. In and out in minutes — happy for hours.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#locations">Find a Store</a>
+      <a class="btn btn-ghost" href="#rewards">Explore KM Rewards</a>
+    </div>
+
+    <div class="fuel-board" aria-label="Today's fuel prices">
+      <div class="fuel-chip"><div class="grade">Regular 87</div><div class="price">$4.29<sup>9</sup></div></div>
+      <div class="fuel-chip"><div class="grade">Plus 89</div><div class="price">$4.49<sup>9</sup></div></div>
+      <div class="fuel-chip"><div class="grade">Premium 91</div><div class="price">$4.69<sup>9</sup></div></div>
+      <div class="fuel-chip diesel"><div class="grade">Diesel</div><div class="price">$4.89<sup>9</sup></div></div>
+    </div>
+    <div class="fuel-note">Sample prices shown — see your local KornerMart pump for today's price.</div>
+
+    <div class="scroll-hint">Scroll ↓</div>
+  </section>
+
+  <!-- WHO WE ARE -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <div class="sec-eyebrow">Who We Are</div>
+        <h2>A family-run stop, built for the neighborhood.</h2>
+        <p class="lead">KornerMart started with one simple idea: a gas station should feel like a corner store — clean, quick, and run by people who know your name. Today we operate stations across Corona, Eastvale, Norco, Riverside, and Ontario, and every one of them is held to the same standard: spotless stores, quality fuel, and genuine service.</p>
+        <div class="values">
+          <div class="value"><div class="dot">⛽</div><div><h4>Quality fuel, every fill</h4><p>Top-tier gasoline and diesel at prices that respect your wallet.</p></div></div>
+          <div class="value"><div class="dot">🧼</div><div><h4>Clean is non-negotiable</h4><p>Bright stores, spotless restrooms, and pumps you don't mind touching.</p></div></div>
+          <div class="value"><div class="dot">🤝</div><div><h4>Local first</h4><p>Family owned and operated — your dollars stay in the community.</p></div></div>
+        </div>
+        <div class="about-stats">
+          <div class="stat"><b>5</b><span>Cities served</span></div>
+          <div class="stat"><b>24/7</b><span>Select locations</span></div>
+          <div class="stat"><b>1000s</b><span>Daily smiles</span></div>
+        </div>
+      </div>
+      <div class="about-visual reveal">
+        <img src="km-logo.jpg" alt="KornerMart brand mark">
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section id="locations">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="sec-eyebrow">Locations</div>
+        <h2>Find your KornerMart.</h2>
+        <p class="lead">Five stations and counting across the Inland Empire. Tap a card for directions.</p>
+      </div>
+      <div class="loc-grid" id="locGrid"></div>
+    </div>
+  </section>
+
+  <!-- KM REWARDS -->
+  <section id="rewards">
+    <div class="wrap">
+      <div class="rewards-head">
+        <div class="reveal">
+          <div class="sec-eyebrow">KM Rewards</div>
+          <h2>Every gallon gives back.</h2>
+          <p class="lead">Earn points on fuel and in-store purchases, then redeem them for cents off per gallon, free drinks, and member-only deals. Sign up free at any register.</p>
+        </div>
+        <div class="calc reveal">
+          <label for="gal">Gallons you fill per week <output id="galOut">12 gal</output></label>
+          <input type="range" id="gal" min="2" max="40" value="12" aria-describedby="calcResult">
+          <div class="calc-out" id="calcResult">
+            <div><b id="ptsMo">240</b><span>points / month</span></div>
+            <div><b id="centsOff">24¢</b><span>off per gallon earned</span></div>
+            <div><b id="freeDrinks">2</b><span>free fountain drinks</span></div>
+          </div>
+          <div class="bubble-score">Psst — popping bubbles on this page has earned you <b id="popPts">0</b> bonus pts 🫧</div>
+        </div>
+      </div>
+
+      <div class="tiers reveal">
+        <div class="tier">
+          <div class="t-name">🔵 Member</div>
+          <div class="t-per">Free forever</div>
+          <div class="t-rate">1<small> pt / gallon</small></div>
+          <ul>
+            <li>Points on every fuel &amp; store purchase</li>
+            <li>Member-only weekly deals</li>
+            <li>Birthday freebie on us</li>
+          </ul>
+          <a class="btn" href="#" data-toast="KM Rewards signup is available in-store at any register!">Join free</a>
+        </div>
+        <div class="tier featured">
+          <div class="t-name">⚡ KM Plus</div>
+          <div class="t-per">Most popular — free after 500 pts</div>
+          <div class="t-rate">2<small> pts / gallon</small></div>
+          <ul>
+            <li>Everything in Member</li>
+            <li>5¢ off per gallon, every Tuesday</li>
+            <li>Free fountain drink every 5 fills</li>
+            <li>Early access to promos</li>
+          </ul>
+          <a class="btn" href="#" data-toast="Reach 500 points and KM Plus unlocks automatically!">Unlock KM Plus</a>
+        </div>
+        <div class="tier">
+          <div class="t-name">🔴 KM Fleet</div>
+          <div class="t-per">For local businesses</div>
+          <div class="t-rate">3<small> pts / gallon</small></div>
+          <ul>
+            <li>Fleet cards for your whole team</li>
+            <li>Volume fuel discounts</li>
+            <li>Monthly statements &amp; controls</li>
+          </ul>
+          <a class="btn" href="#" data-toast="Email fleet@kornermart.com to set up a business account.">Talk to us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREERS -->
+  <section id="careers">
+    <div class="wrap">
+      <div class="careers-top">
+        <div class="reveal">
+          <div class="sec-eyebrow">Careers</div>
+          <h2>Work on the korner.</h2>
+          <p class="lead">Flexible schedules, friendly teams, and real growth — most of our managers started at the register.</p>
+        </div>
+        <div class="filter reveal" id="jobFilter" role="group" aria-label="Filter jobs by city">
+          <button class="active" data-city="All">All</button>
+          <button data-city="Corona">Corona</button>
+          <button data-city="Eastvale">Eastvale</button>
+          <button data-city="Norco">Norco</button>
+          <button data-city="Riverside">Riverside</button>
+          <button data-city="Ontario">Ontario</button>
+        </div>
+      </div>
+      <div class="jobs reveal" id="jobs"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="km-logo.jpg" alt="KornerMart">
+      <p>Fuel, snacks &amp; smiles on every korner. Family owned and operated in the Inland Empire.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <a href="#about">Who We Are</a>
+      <a href="#locations">Locations</a>
+      <a href="#rewards">KM Rewards</a>
+      <a href="#careers">Careers</a>
+    </div>
+    <div>
+      <h5>Locations</h5>
+      <a href="#locations">Corona</a>
+      <a href="#locations">Eastvale</a>
+      <a href="#locations">Norco</a>
+      <a href="#locations">Riverside</a>
+      <a href="#locations">Ontario</a>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <a href="mailto:hello@kornermart.com">hello@kornermart.com</a>
+      <a href="mailto:careers@kornermart.com">careers@kornermart.com</a>
+      <a href="mailto:fleet@kornermart.com">fleet@kornermart.com</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 KornerMart. All rights reserved.</span>
+    <span>Made with <b>♥</b> on the korner</span>
+  </div>
+</footer>
+
+<div id="toast" role="status"></div>
+
+<script>
+/* ============ DATA ============ */
+const LOCATIONS = [
+  {city:"Corona", addr:"123 Main St, Corona, CA 92879", badge:"open", amenities:["24/7","Diesel","Air & Water","ATM"], },
+  {city:"Eastvale", addr:"456 Hamner Ave, Eastvale, CA 92880", badge:"open", amenities:["Car Wash","Diesel","Coffee Bar","EV Charging"]},
+  {city:"Norco", addr:"789 Sixth St, Norco, CA 92860", badge:"open", amenities:["Diesel","Propane","Air & Water"]},
+  {city:"Riverside", addr:"321 University Ave, Riverside, CA 92501", badge:"open", amenities:["24/7","Coffee Bar","ATM"]},
+  {city:"Ontario", addr:"654 Euclid Ave, Ontario, CA 91762", badge:"new", amenities:["Diesel","Car Wash","EV Charging","ATM"]},
+];
+
+const JOBS = [
+  {title:"Store Associate", city:"Corona", type:"Part-time", pay:"$17–$19/hr",
+   desc:"Be the friendly face at the register — ring up customers, stock shelves, and keep the store spotless.",
+   reqs:["Weekend availability","Great with people","No experience needed — we train"]},
+  {title:"Shift Lead", city:"Eastvale", type:"Full-time", pay:"$20–$23/hr",
+   desc:"Run the floor during your shift: open/close the store, lead a small team, and handle cash reconciliation.",
+   reqs:["1+ year retail experience","Reliable & detail-oriented","Comfortable with POS systems"]},
+  {title:"Store Associate", city:"Norco", type:"Part-time", pay:"$17–$19/hr",
+   desc:"Morning and evening shifts available. Keep coffee brewing, coolers full, and customers smiling.",
+   reqs:["Early morning availability a plus","Team player","Food handler card (we'll help you get one)"]},
+  {title:"Assistant Manager", city:"Riverside", type:"Full-time", pay:"$24–$28/hr",
+   desc:"Partner with the store manager on scheduling, vendor orders, fuel deliveries, and team development.",
+   reqs:["2+ years retail leadership","Inventory management experience","Open availability"]},
+  {title:"Overnight Associate", city:"Ontario", type:"Full-time", pay:"$19–$21/hr",
+   desc:"Keep our newest 24/7 location running smoothly overnight — restock, clean, and serve night-owl customers.",
+   reqs:["Overnight availability (10pm–6am)","Self-starter","18+ required"]},
+];
+
+/* ============ RENDER LOCATIONS ============ */
+const locGrid = document.getElementById('locGrid');
+LOCATIONS.forEach(l=>{
+  const card = document.createElement('div');
+  card.className = 'loc-card reveal';
+  card.innerHTML = `
+    <div class="loc-city">${l.city} <span class="badge ${l.badge}">${l.badge==='new'?'New!':'Open'}</span></div>
+    <div class="loc-addr">${l.addr}</div>
+    <div class="amenities">${l.amenities.map(a=>`<span>${a}</span>`).join('')}</div>
+    <a href="https://www.google.com/maps/search/${encodeURIComponent('KornerMart '+l.addr)}" target="_blank" rel="noopener">Get directions</a>`;
+  locGrid.appendChild(card);
+});
+
+/* ============ RENDER JOBS ============ */
+const jobsEl = document.getElementById('jobs');
+JOBS.forEach((j,i)=>{
+  const el = document.createElement('div');
+  el.className = 'job';
+  el.dataset.city = j.city;
+  el.innerHTML = `
+    <button class="job-head" aria-expanded="false" aria-controls="jb${i}">
+      <span class="job-title">${j.title}</span>
+      <span class="job-meta">
+        <span>${j.city}</span><span>${j.type}</span><span class="pay">${j.pay}</span>
+      </span>
+      <span class="chev">▾</span>
+    </button>
+    <div class="job-body" id="jb${i}">
+      <div class="job-body-inner">
+        <p>${j.desc}</p>
+        <ul>${j.reqs.map(r=>`<li>${r}</li>`).join('')}</ul>
+        <a class="btn btn-primary" style="font-size:14.5px;padding:12px 24px"
+           href="mailto:careers@kornermart.com?subject=${encodeURIComponent('Application: '+j.title+' — '+j.city)}">Apply by email</a>
+      </div>
+    </div>`;
+  jobsEl.appendChild(el);
+});
+
+jobsEl.addEventListener('click', e=>{
+  const head = e.target.closest('.job-head');
+  if(!head) return;
+  const job = head.parentElement;
+  const body = job.querySelector('.job-body');
+  const open = job.classList.toggle('open-j');
+  head.setAttribute('aria-expanded', open);
+  body.style.maxHeight = open ? body.scrollHeight + 'px' : 0;
+});
+
+/* job filter */
+document.getElementById('jobFilter').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  document.querySelectorAll('#jobFilter button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const city = btn.dataset.city;
+  document.querySelectorAll('.job').forEach(j=>{
+    j.classList.toggle('hidden', city!=='All' && j.dataset.city!==city);
+  });
+});
+
+/* ============ REWARDS CALCULATOR ============ */
+const gal = document.getElementById('gal');
+function calc(){
+  const g = +gal.value;
+  gal.style.setProperty('--fill', ((g-2)/(40-2)*100)+'%');
+  document.getElementById('galOut').textContent = g + ' gal';
+  const pts = g*4* (g>=20?2:1) + (popCount*5);
+  document.getElementById('ptsMo').textContent = pts;
+  document.getElementById('centsOff').textContent = Math.round(pts/10)+'¢';
+  document.getElementById('freeDrinks').textContent = Math.floor(pts/120);
+}
+gal.addEventListener('input', calc);
+
+/* ============ TOAST ============ */
+const toast = document.getElementById('toast');
+let toastT;
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(()=>toast.classList.remove('show'), 3200);
+}
+document.querySelectorAll('[data-toast]').forEach(a=>{
+  a.addEventListener('click', e=>{e.preventDefault(); showToast(a.dataset.toast);});
+});
+
+/* ============ MOBILE MENU ============ */
+const menuBtn = document.getElementById('menuBtn');
+const nav = document.getElementById('nav');
+menuBtn.addEventListener('click', ()=>{
+  const open = nav.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
+});
+nav.addEventListener('click', e=>{ if(e.target.tagName==='A'){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }});
+
+/* ============ SCROLL REVEAL ============ */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============ FLOATING BUBBLES (signature) ============ */
+const canvas = document.getElementById('bubbles');
+const ctx = canvas.getContext('2d');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W,H,dpr, bubbles=[], mouse={x:-999,y:-999};
+let popCount = 0;
+const popEl = document.getElementById('popPts');
+
+function resize(){
+  dpr = Math.min(devicePixelRatio||1, 2);
+  W = innerWidth; H = innerHeight;
+  canvas.width = W*dpr; canvas.height = H*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+resize(); addEventListener('resize', resize);
+
+const COLORS = [
+  {r:27,g:117,b:188}, // KM blue
+  {r:47,g:168,b:225}, // sky
+  {r:227,g:30,b:38},  // KM red (rare)
+];
+function makeBubble(fromBottom){
+  const red = Math.random()<0.18;
+  const c = red ? COLORS[2] : COLORS[Math.random()<.5?0:1];
+  const r = 8+Math.random()*34;
+  return {
+    x: Math.random()*W,
+    y: fromBottom ? H + r + Math.random()*120 : Math.random()*H,
+    r, c,
+    vy: .25 + Math.random()*.55,
+    vx: (Math.random()-.5)*.18,
+    wob: Math.random()*Math.PI*2,
+    wobSp: .008+Math.random()*.014,
+    a: .10+Math.random()*.14,
+    pop: 0,
+  };
+}
+const COUNT = Math.min(26, Math.floor(W/55));
+if(!reduced){ for(let i=0;i<COUNT;i++) bubbles.push(makeBubble(false)); }
+
+addEventListener('pointermove', e=>{ mouse.x=e.clientX; mouse.y=e.clientY; });
+addEventListener('pointerleave', ()=>{ mouse.x=mouse.y=-999; });
+addEventListener('pointerdown', e=>{
+  if(reduced) return;
+  // pop the closest bubble under the pointer (canvas is pointer-events:none, so page stays clickable)
+  for(const b of bubbles){
+    if(b.pop) continue;
+    const dx=e.clientX-b.x, dy=e.clientY-b.y;
+    if(dx*dx+dy*dy < (b.r+8)*(b.r+8)){
+      b.pop = 1;
+      popCount++;
+      if(popEl){ popEl.textContent = popCount*5; calc(); }
+      if(popCount===10) showToast('🫧 Bubble master! +50 bonus pts');
+      break;
+    }
+  }
+});
+
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  for(let i=0;i<bubbles.length;i++){
+    const b = bubbles[i];
+    if(b.pop){
+      b.pop += .12;
+      if(b.pop>=2){ bubbles[i]=makeBubble(true); continue; }
+      const pr = b.r*(1+ (b.pop-1)*.9);
+      ctx.globalAlpha = Math.max(0, b.a*(2-b.pop));
+      ctx.strokeStyle = `rgb(${b.c.r},${b.c.g},${b.c.b})`;
+      ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(b.x,b.y,pr,0,7); ctx.stroke();
+      ctx.globalAlpha = 1;
+      continue;
+    }
+    b.wob += b.wobSp;
+    b.x += b.vx + Math.sin(b.wob)*.3;
+    b.y -= b.vy;
+    // cursor repulsion
+    const dx=b.x-mouse.x, dy=b.y-mouse.y, d2=dx*dx+dy*dy, R=130;
+    if(d2 < R*R && d2>0.01){
+      const d=Math.sqrt(d2), f=(R-d)/R*1.6;
+      b.x += dx/d*f; b.y += dy/d*f;
+    }
+    if(b.y < -b.r-20) bubbles[i]=makeBubble(true);
+    if(b.x < -60) b.x = W+50; if(b.x > W+60) b.x = -50;
+
+    const g = ctx.createRadialGradient(b.x-b.r*.35,b.y-b.r*.35,b.r*.1,b.x,b.y,b.r);
+    g.addColorStop(0,`rgba(255,255,255,${b.a+.12})`);
+    g.addColorStop(.55,`rgba(${b.c.r},${b.c.g},${b.c.b},${b.a})`);
+    g.addColorStop(1,`rgba(${b.c.r},${b.c.g},${b.c.b},${b.a*.35})`);
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,7); ctx.fill();
+    // rim
+    ctx.strokeStyle = `rgba(${b.c.r},${b.c.g},${b.c.b},${b.a*.9})`;
+    ctx.lineWidth = 1.2;
+    ctx.beginPath(); ctx.arc(b.x,b.y,b.r,0,7); ctx.stroke();
+    // glint
+    ctx.fillStyle = `rgba(255,255,255,${b.a+.25})`;
+    ctx.beginPath(); ctx.arc(b.x-b.r*.35,b.y-b.r*.38,b.r*.16,0,7); ctx.fill();
+  }
+  requestAnimationFrame(draw);
+}
+if(!reduced) draw();
+
+calc();
+</script>
+</body>
+</html>
