@@ -225,17 +225,19 @@ h2{
 }
 .loc-card:hover{transform:translateY(-7px);box-shadow:var(--shadow)}
 .loc-card:hover::before{transform:scaleX(1)}
-.loc-city{font-family:var(--font-display);font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:space-between}
-.badge{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.loc-city{font-family:var(--font-display);font-weight:800;font-size:22px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.loc-code{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px}
+.badge{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px;flex-shrink:0}
 .badge.open{background:#E7F6EC;color:#177A3E}
 .badge.new{background:#FDEBEC;color:var(--red)}
-.loc-addr{color:var(--ink-soft);font-size:14.5px;margin:10px 0 16px}
+.loc-addr{color:var(--ink-soft);font-size:14.5px;margin:10px 0 16px;font-weight:400;display:block}
+.loc-addr:hover{color:var(--blue)}
 .amenities{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
 .amenities span{font-size:12.5px;font-weight:500;background:var(--ice);color:var(--blue);padding:6px 12px;border-radius:999px;border:1px solid rgba(27,117,188,.12)}
-.loc-card a{font-weight:600;font-size:14.5px;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.loc-card a:hover{color:var(--red)}
-.loc-card a::after{content:"→";transition:transform .2s}
-.loc-card a:hover::after{transform:translateX(4px)}
+.loc-card a.loc-dir{font-weight:600;font-size:14.5px;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.loc-card a.loc-dir:hover{color:var(--red)}
+.loc-card a.loc-dir::after{content:"→";transition:transform .2s}
+.loc-card a.loc-dir:hover::after{transform:translateX(4px)}
 
 /* ---------- rewards ---------- */
 #rewards{background:var(--ice);padding-top:40px}
@@ -406,7 +408,7 @@ footer a:hover{color:var(--sky)}
 
   <!-- HERO -->
   <section class="hero">
-    <div class="eyebrow">Now fueling 5 cities across the Inland Empire</div>
+    <div class="eyebrow">Now fueling across Southern Utah</div>
     <h1>Fuel, snacks &amp; <span class="grad-blue">smiles</span> on every <span class="grad-red">korner.</span></h1>
     <p>KornerMart is your neighborhood stop for quality fuel, clean stores, cold drinks, and the friendliest faces in town. In and out in minutes — happy for hours.</p>
     <div class="hero-actions">
@@ -431,7 +433,7 @@ footer a:hover{color:var(--sky)}
       <div class="reveal">
         <div class="sec-eyebrow">Who We Are</div>
         <h2>A family-run stop, built for the neighborhood.</h2>
-        <p class="lead">KornerMart started with one simple idea: a gas station should feel like a corner store — clean, quick, and run by people who know your name. Today we operate stations across Corona, Eastvale, Norco, Riverside, and Ontario, and every one of them is held to the same standard: spotless stores, quality fuel, and genuine service.</p>
+        <p class="lead">KornerMart started with one simple idea: a gas station should feel like a corner store — clean, quick, and run by people who know your name. Today we operate stations across Southern Utah, with every one of them held to the same standard: spotless stores, quality fuel, and genuine service.</p>
         <div class="values">
           <div class="value"><div class="dot">⛽</div><div><h4>Quality fuel, every fill</h4><p>Top-tier gasoline and diesel at prices that respect your wallet.</p></div></div>
           <div class="value"><div class="dot">🧼</div><div><h4>Clean is non-negotiable</h4><p>Bright stores, spotless restrooms, and pumps you don't mind touching.</p></div></div>
@@ -455,7 +457,7 @@ footer a:hover{color:var(--sky)}
       <div class="reveal">
         <div class="sec-eyebrow">Locations</div>
         <h2>Find your KornerMart.</h2>
-        <p class="lead">Five stations and counting across the Inland Empire. Tap a card for directions.</p>
+        <p class="lead">Twelve stations across Southern Utah. Tap a card for directions.</p>
       </div>
       <div class="loc-grid" id="locGrid"></div>
     </div>
@@ -584,11 +586,18 @@ footer a:hover{color:var(--sky)}
 <script>
 /* ============ DATA ============ */
 const LOCATIONS = [
-  {city:"Corona", addr:"123 Main St, Corona, CA 92879", badge:"open", amenities:["24/7","Diesel","Air & Water","ATM"], },
-  {city:"Eastvale", addr:"456 Hamner Ave, Eastvale, CA 92880", badge:"open", amenities:["Car Wash","Diesel","Coffee Bar","EV Charging"]},
-  {city:"Norco", addr:"789 Sixth St, Norco, CA 92860", badge:"open", amenities:["Diesel","Propane","Air & Water"]},
-  {city:"Riverside", addr:"321 University Ave, Riverside, CA 92501", badge:"open", amenities:["24/7","Coffee Bar","ATM"]},
-  {city:"Ontario", addr:"654 Euclid Ave, Ontario, CA 91762", badge:"new", amenities:["Diesel","Car Wash","EV Charging","ATM"]},
+  {code:"KM 01", city:"Hurricane Chevron", addr:"687 W State St, Hurricane, UT 84737", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 02", city:"Green Valley Sinclair", addr:"567 S Valley View Dr #15, St. George, UT 84770", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 03", city:"Sunset Chevron", addr:"929 W Sunset Blvd, St. George, UT 84770", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 04", city:"Sunset Texaco", addr:"851 W Sunset Blvd, St. George, UT 84770", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 05", city:"Riverside Texaco", addr:"1572 S Convention Center Dr, St. George, UT 84790", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 06", city:"Riverside Chevron", addr:"125 E Riverside Dr, St. George, UT 84790", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 07", city:"700 Store", addr:"795 E 700 S, St. George, UT 84770", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 08", city:"Cedar City", addr:"1355 S Main St, Cedar City, UT 84720", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 09", city:"Coral Canyon", addr:"82 N Coral Canyon Blvd, Hurricane, UT 84737", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 10", city:"Last Chance Helper", addr:"156 N Main St, Helper, UT 84526", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 11", city:"St. Blvd", addr:"994 E St. George Blvd, St. George, UT 84770", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 12", city:"Apple Valley", addr:"1354 State St, Apple Valley, UT 84737", badge:"open", amenities:["Fuel","Convenience"]},
 ];
 
 const JOBS = [
@@ -614,11 +623,18 @@ const locGrid = document.getElementById('locGrid');
 LOCATIONS.forEach(l=>{
   const card = document.createElement('div');
   card.className = 'loc-card reveal';
+  const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent('KornerMart '+l.addr)}`;
   card.innerHTML = `
-    <div class="loc-city">${l.city} <span class="badge ${l.badge}">${l.badge==='new'?'New!':'Open'}</span></div>
-    <div class="loc-addr">${l.addr}</div>
+    <div class="loc-city">
+      <div>
+        <div class="loc-code">${l.code}</div>
+        <div>${l.city}</div>
+      </div>
+      <span class="badge ${l.badge}">${l.badge==='new'?'New!':'Open'}</span>
+    </div>
+    <a class="loc-addr" href="${mapsUrl}" target="_blank" rel="noopener">${l.addr}</a>
     <div class="amenities">${l.amenities.map(a=>`<span>${a}</span>`).join('')}</div>
-    <a href="https://www.google.com/maps/search/${encodeURIComponent('KornerMart '+l.addr)}" target="_blank" rel="noopener">Get directions</a>`;
+    <a class="loc-dir" href="${mapsUrl}" target="_blank" rel="noopener">Get directions</a>`;
   locGrid.appendChild(card);
 });
 
