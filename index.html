@@ -198,7 +198,7 @@ h2{
 .about-visual img{width:62%;max-width:340px;background:#fff;border-radius:28px;padding:28px;box-shadow:0 26px 60px -20px rgba(11,37,64,.45);transform:rotate(-3deg);transition:transform .4s}
 .about-visual:hover img{transform:rotate(0deg) scale(1.03)}
 .about-visual::after{
-  content:"EST. INLAND EMPIRE";
+  content:"EST. ST. GEORGE";
   position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
   color:rgba(255,255,255,.85);font-size:11.5px;letter-spacing:.28em;font-weight:600;
 }
@@ -292,6 +292,13 @@ input[type=range]:focus-visible{outline:3px solid var(--sky);outline-offset:4px}
 .calc-out div span{font-size:13px;color:var(--ink-soft)}
 .bubble-score{margin-top:16px;font-size:13px;color:var(--ink-soft)}
 .bubble-score b{color:var(--blue);font-family:var(--font-num)}
+.rewards-title{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.rewards-title h2{margin-bottom:0}
+.coming-soon{
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  padding:5px 12px;border-radius:999px;
+  background:#FDEBEC;color:var(--red);
+}
 
 /* ---------- careers ---------- */
 #careers{background:var(--white)}
@@ -469,8 +476,11 @@ footer a:hover{color:var(--sky)}
       <div class="rewards-head">
         <div class="reveal">
           <div class="sec-eyebrow">KM Rewards</div>
-          <h2>Every gallon gives back.</h2>
-          <p class="lead">Earn points on fuel and in-store purchases, then redeem them for cents off per gallon, free drinks, and member-only deals. Sign up free at any register.</p>
+          <div class="rewards-title">
+            <h2>Every gallon gives back.</h2>
+            <span class="coming-soon">Coming Soon</span>
+          </div>
+          <p class="lead">Earn points on fuel and in-store purchases, then redeem them for cents off per gallon, free drinks, and member-only deals. Launching soon at KornerMart locations.</p>
         </div>
         <div class="calc reveal">
           <label for="gal">Gallons you fill per week <output id="galOut">12 gal</output></label>
@@ -494,7 +504,7 @@ footer a:hover{color:var(--sky)}
             <li>Member-only weekly deals</li>
             <li>Birthday freebie on us</li>
           </ul>
-          <a class="btn" href="#" data-toast="KM Rewards signup is available in-store at any register!">Join free</a>
+          <a class="btn" href="#" data-toast="KM Rewards is coming soon!">Join free</a>
         </div>
         <div class="tier featured">
           <div class="t-name">⚡ KM Plus</div>
@@ -506,7 +516,7 @@ footer a:hover{color:var(--sky)}
             <li>Free fountain drink every 5 fills</li>
             <li>Early access to promos</li>
           </ul>
-          <a class="btn" href="#" data-toast="Reach 500 points and KM Plus unlocks automatically!">Unlock KM Plus</a>
+          <a class="btn" href="#" data-toast="KM Rewards is coming soon!">Unlock KM Plus</a>
         </div>
         <div class="tier">
           <div class="t-name">🔴 KM Fleet</div>
@@ -517,7 +527,7 @@ footer a:hover{color:var(--sky)}
             <li>Volume fuel discounts</li>
             <li>Monthly statements &amp; controls</li>
           </ul>
-          <a class="btn" href="#" data-toast="Email fleet@kornermart.com to set up a business account.">Talk to us</a>
+          <a class="btn" href="#" data-toast="KM Rewards is coming soon!">Talk to us</a>
         </div>
       </div>
     </div>
@@ -532,13 +542,13 @@ footer a:hover{color:var(--sky)}
           <h2>Work on the korner.</h2>
           <p class="lead">Flexible schedules, friendly teams, and real growth — most of our managers started at the register.</p>
         </div>
-        <div class="filter reveal" id="jobFilter" role="group" aria-label="Filter jobs by city">
+        <div class="filter reveal" id="jobFilter" role="group" aria-label="Filter jobs by region">
           <button class="active" data-city="All">All</button>
-          <button data-city="Corona">Corona</button>
-          <button data-city="Eastvale">Eastvale</button>
-          <button data-city="Norco">Norco</button>
-          <button data-city="Riverside">Riverside</button>
-          <button data-city="Ontario">Ontario</button>
+          <button data-city="St. George">St. George</button>
+          <button data-city="Cedar City">Cedar City</button>
+          <button data-city="Helper">Helper</button>
+          <button data-city="Apple Valley">Apple Valley</button>
+          <button data-city="Hurricane">Hurricane</button>
         </div>
       </div>
       <div class="jobs reveal" id="jobs"></div>
@@ -551,7 +561,7 @@ footer a:hover{color:var(--sky)}
   <div class="foot-grid">
     <div class="foot-brand">
       <img src="km-logo.jpg" alt="KornerMart">
-      <p>Fuel, snacks &amp; smiles on every korner. Family owned and operated in the Inland Empire.</p>
+      <p>Fuel, snacks &amp; smiles on every korner. Family owned and operated in the Southern Utah region.</p>
     </div>
     <div>
       <h5>Explore</h5>
@@ -562,11 +572,11 @@ footer a:hover{color:var(--sky)}
     </div>
     <div>
       <h5>Locations</h5>
-      <a href="#locations">Corona</a>
-      <a href="#locations">Eastvale</a>
-      <a href="#locations">Norco</a>
-      <a href="#locations">Riverside</a>
-      <a href="#locations">Ontario</a>
+      <a href="#locations">St. George</a>
+      <a href="#locations">Cedar City</a>
+      <a href="#locations">Helper</a>
+      <a href="#locations">Apple Valley</a>
+      <a href="#locations">Hurricane</a>
     </div>
     <div>
       <h5>Contact</h5>
@@ -601,21 +611,24 @@ const LOCATIONS = [
 ];
 
 const JOBS = [
-  {title:"Store Associate", city:"Corona", type:"Part-time", pay:"$17–$19/hr",
-   desc:"Be the friendly face at the register — ring up customers, stock shelves, and keep the store spotless.",
+  {title:"Store Associate", city:"St. George", type:"Part-time", pay:"$15–$17/hr",
+   desc:"Be the friendly face at the register — ring up customers, stock shelves, and keep the store spotless. Multiple St. George locations hiring.",
    reqs:["Weekend availability","Great with people","No experience needed — we train"]},
-  {title:"Shift Lead", city:"Eastvale", type:"Full-time", pay:"$20–$23/hr",
+  {title:"Shift Lead", city:"St. George", type:"Full-time", pay:"$18–$21/hr",
    desc:"Run the floor during your shift: open/close the store, lead a small team, and handle cash reconciliation.",
    reqs:["1+ year retail experience","Reliable & detail-oriented","Comfortable with POS systems"]},
-  {title:"Store Associate", city:"Norco", type:"Part-time", pay:"$17–$19/hr",
-   desc:"Morning and evening shifts available. Keep coffee brewing, coolers full, and customers smiling.",
+  {title:"Store Associate", city:"Hurricane", type:"Part-time", pay:"$15–$17/hr",
+   desc:"Morning and evening shifts available at our Hurricane locations. Keep coffee brewing, coolers full, and customers smiling.",
    reqs:["Early morning availability a plus","Team player","Food handler card (we'll help you get one)"]},
-  {title:"Assistant Manager", city:"Riverside", type:"Full-time", pay:"$24–$28/hr",
-   desc:"Partner with the store manager on scheduling, vendor orders, fuel deliveries, and team development.",
+  {title:"Assistant Manager", city:"Helper", type:"Full-time", pay:"$20–$24/hr",
+   desc:"Partner with the store manager at Last Chance Helper on scheduling, vendor orders, fuel deliveries, and team development.",
    reqs:["2+ years retail leadership","Inventory management experience","Open availability"]},
-  {title:"Overnight Associate", city:"Ontario", type:"Full-time", pay:"$19–$21/hr",
-   desc:"Keep our newest 24/7 location running smoothly overnight — restock, clean, and serve night-owl customers.",
-   reqs:["Overnight availability (10pm–6am)","Self-starter","18+ required"]},
+  {title:"Store Associate", city:"Apple Valley", type:"Part-time", pay:"$15–$17/hr",
+   desc:"Join our Apple Valley team — help keep the store clean, stocked, and welcoming for every customer who stops in.",
+   reqs:["Flexible availability","Team player","No experience needed — we train"]},
+  {title:"Store Associate", city:"Cedar City", type:"Part-time", pay:"$15–$17/hr",
+   desc:"Be part of our Cedar City location on S Main St — ring up customers, stock shelves, and keep the store spotless.",
+   reqs:["Weekend availability","Great with people","No experience needed — we train"]},
 ];
 
 /* ============ RENDER LOCATIONS ============ */
