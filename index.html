@@ -540,7 +540,7 @@ footer a:hover{color:var(--sky)}
         <div class="reveal">
           <div class="sec-eyebrow">Careers</div>
           <h2>Work on the korner.</h2>
-          <p class="lead">Flexible schedules, friendly teams, and real growth — most of our managers started at the register.</p>
+          <p class="lead">Flexible schedules, friendly teams, and real growth opportunities.</p>
         </div>
         <div class="filter reveal" id="jobFilter" role="group" aria-label="Filter jobs by region">
           <button class="active" data-city="All">All</button>
@@ -596,7 +596,7 @@ footer a:hover{color:var(--sky)}
 <script>
 /* ============ DATA ============ */
 const LOCATIONS = [
-  {code:"KM 01", city:"Hurricane Chevron", addr:"687 W State St, Hurricane, UT 84737", badge:"open", amenities:["Fuel","Convenience"]},
+  {code:"KM 01", city:"Hurricane Chevron", addr:"687 W State St, Hurricane, UT 84737", directionsUrl:"https://maps.app.goo.gl/hXrhr6Jut2UebfpE6", badge:"open", amenities:["Fuel","Convenience"]},
   {code:"KM 02", city:"Green Valley Sinclair", addr:"567 S Valley View Dr #15, St. George, UT 84770", badge:"open", amenities:["Fuel","Convenience"]},
   {code:"KM 03", city:"Sunset Chevron", addr:"929 W Sunset Blvd, St. George, UT 84770", badge:"open", amenities:["Fuel","Convenience"]},
   {code:"KM 04", city:"Sunset Texaco", addr:"851 W Sunset Blvd, St. George, UT 84770", badge:"open", amenities:["Fuel","Convenience"]},
@@ -611,6 +611,15 @@ const LOCATIONS = [
 ];
 
 const JOBS = [
+  {title:"Regional Manager", city:"St. George", location:"Greater St. George Area (Multiple Locations)", type:"Full-Time", pay:"$42,000–$45,000/yr",
+   desc:"We are seeking an experienced, organized, and hands-on Regional Manager to oversee the daily operations of multiple convenience store and gas station locations throughout the Greater St. George area. This role is responsible for ensuring each location operates efficiently, maintains high standards of cleanliness and customer service, and consistently meets company expectations for profitability, compliance, and operational excellence. The ideal candidate is a strong leader who enjoys developing people, solving problems, holding teams accountable, and traveling between locations to ensure every store is operating at its highest potential.",
+   reqs:["Proven multi-unit or retail leadership experience","Strong people development & accountability skills","Willing to travel between St. George–area locations","Hands-on, organized, and results-driven"]},
+  {title:"Office Administrator", city:"St. George", type:"Full-Time", pay:"$16–$18/hr",
+   desc:"We are seeking a dependable, organized, and detail-oriented Office Administrator to support the daily operations of our convenience store and gas station business. This position is responsible for administrative tasks, basic accounting, payroll support, record keeping, and assisting management with day-to-day business operations. The ideal candidate is comfortable working with numbers, proficient with Microsoft Office, and able to multitask in a fast-paced environment.",
+   reqs:["Proficient with Microsoft Office","Comfortable with basic accounting & payroll support","Detail-oriented and organized","Able to multitask in a fast-paced environment"]},
+  {title:"Facilities Maintenance Technician", city:"St. George", type:"Full-Time", pay:"$20–$25/hr",
+   desc:"We are looking for a reliable, self-motivated Facilities Maintenance Technician to maintain and repair our convenience store and gas station facilities. This position is responsible for keeping the property clean, safe, and fully operational by performing general maintenance, preventative maintenance, and minor repairs. The ideal candidate has strong handyman skills, takes pride in quality work, and can troubleshoot problems independently.",
+   reqs:["Strong general handyman skills","Preventative maintenance & minor repair experience","Able to troubleshoot problems independently","Reliable, self-motivated, and committed to quality work"]},
   {title:"Store Associate", city:"St. George", type:"Part-time", pay:"$15–$17/hr",
    desc:"Be the friendly face at the register — ring up customers, stock shelves, and keep the store spotless. Multiple St. George locations hiring.",
    reqs:["Weekend availability","Great with people","No experience needed — we train"]},
@@ -637,6 +646,7 @@ LOCATIONS.forEach(l=>{
   const card = document.createElement('div');
   card.className = 'loc-card reveal';
   const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent('KornerMart '+l.addr)}`;
+  const directionsUrl = l.directionsUrl || mapsUrl;
   card.innerHTML = `
     <div class="loc-city">
       <div>
@@ -647,7 +657,7 @@ LOCATIONS.forEach(l=>{
     </div>
     <a class="loc-addr" href="${mapsUrl}" target="_blank" rel="noopener">${l.addr}</a>
     <div class="amenities">${l.amenities.map(a=>`<span>${a}</span>`).join('')}</div>
-    <a class="loc-dir" href="${mapsUrl}" target="_blank" rel="noopener">Get directions</a>`;
+    <a class="loc-dir" href="${directionsUrl}" target="_blank" rel="noopener">Get directions</a>`;
   locGrid.appendChild(card);
 });
 
@@ -661,7 +671,7 @@ JOBS.forEach((j,i)=>{
     <button class="job-head" aria-expanded="false" aria-controls="jb${i}">
       <span class="job-title">${j.title}</span>
       <span class="job-meta">
-        <span>${j.city}</span><span>${j.type}</span><span class="pay">${j.pay}</span>
+        <span>${j.location||j.city}</span><span>${j.type}</span><span class="pay">${j.pay}</span>
       </span>
       <span class="chev">▾</span>
     </button>
@@ -670,7 +680,7 @@ JOBS.forEach((j,i)=>{
         <p>${j.desc}</p>
         <ul>${j.reqs.map(r=>`<li>${r}</li>`).join('')}</ul>
         <a class="btn btn-primary" style="font-size:14.5px;padding:12px 24px"
-           href="mailto:careers@kornermart.com?subject=${encodeURIComponent('Application: '+j.title+' — '+j.city)}">Apply by email</a>
+           href="mailto:careers@kornermart.com?subject=${encodeURIComponent('Application: '+j.title+' — '+(j.location||j.city))}">Apply by email</a>
       </div>
     </div>`;
   jobsEl.appendChild(el);
