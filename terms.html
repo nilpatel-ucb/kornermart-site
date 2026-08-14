@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms &amp; Conditions — KornerMart</title>
+<meta name="description" content="Terms and Conditions for using the KornerMart website, applying for jobs, and learning about our stores and services.">
+<link rel="icon" type="image/jpeg" href="km-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1B75BC;
+  --sky:#2FA8E1;
+  --red:#E31E26;
+  --red-deep:#A50E14;
+  --ink:#0B2540;
+  --ink-soft:#4A6580;
+  --ice:#F2F8FD;
+  --white:#FFFFFF;
+  --radius:28px;
+  --shadow:0 20px 50px -20px rgba(11,37,64,.18);
+  --font-display:'Sora',sans-serif;
+  --font-body:'Instrument Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:linear-gradient(180deg,#F7FBFE 0%,#fff 280px);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+::selection{background:var(--sky);color:#fff}
+
+header{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  width:min(1120px,calc(100% - 32px));
+  z-index:50;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(27,117,188,.12);
+  border-radius:999px;
+  box-shadow:0 8px 30px -12px rgba(11,37,64,.15);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px 10px 20px;
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:38px;width:auto;display:block}
+.brand span{font-family:var(--font-display);font-weight:800;font-size:17px;color:var(--ink);letter-spacing:.02em}
+.brand span b{color:var(--blue);font-weight:800}
+nav{display:flex;align-items:center;gap:4px}
+nav a{
+  text-decoration:none;color:var(--ink-soft);
+  font-weight:600;font-size:14.5px;
+  padding:9px 14px;border-radius:999px;
+  transition:color .2s,background .2s;
+}
+nav a:hover{color:var(--blue);background:var(--ice)}
+nav a.cta{
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  color:#fff;margin-left:6px;
+  box-shadow:0 6px 18px -6px rgba(27,117,188,.55);
+}
+nav a.cta:hover{filter:brightness(1.08);color:#fff}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px}
+
+.page{max-width:800px;margin:0 auto;padding:140px 24px 80px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);
+  background:var(--ice);
+  border:1px solid rgba(27,117,188,.15);
+  padding:8px 18px;border-radius:999px;
+  margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+h1{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(34px,5vw,52px);letter-spacing:-.02em;line-height:1.1;
+  margin-bottom:12px;
+}
+.lead{color:var(--ink-soft);font-size:17.5px;margin-bottom:12px}
+.effective{color:var(--ink-soft);font-size:14.5px;margin-bottom:28px}
+
+.toc{
+  background:var(--ice);
+  border:1px solid rgba(27,117,188,.12);
+  border-radius:20px;
+  padding:24px 24px 16px;
+  margin:0 0 36px;
+  text-align:left;
+}
+.toc h2{
+  font-family:var(--font-display);font-weight:800;font-size:24px;
+  letter-spacing:-.02em;color:var(--ink);text-transform:none;
+  margin:0 0 14px;padding:0;text-align:left;
+}
+.toc ol{margin:0 0 12px 20px;color:var(--ink-soft);font-size:14.5px}
+.toc li{margin:5px 0}
+.toc a{color:var(--blue);font-weight:600;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+
+.legal h2{
+  font-family:var(--font-display);font-weight:800;font-size:24px;
+  letter-spacing:-.02em;margin:40px 0 12px;padding-top:12px;scroll-margin-top:96px;
+}
+.legal h3{
+  font-family:var(--font-display);font-weight:700;font-size:17px;
+  margin:22px 0 8px;
+}
+.legal p{color:var(--ink-soft);margin-bottom:14px;font-size:16px}
+.legal ul,.legal ol{color:var(--ink-soft);margin:0 0 16px 22px}
+.legal li{margin:6px 0}
+.legal a{color:var(--blue);font-weight:600}
+.disclaimer{
+  background:var(--ice);border-radius:16px;padding:16px 18px;
+  font-size:13.5px;color:var(--ink-soft);margin-top:36px;
+}
+
+footer{
+  background:var(--ink);color:#B9CCDD;
+  border-radius:64px 64px 0 0;
+  padding:80px 24px 36px;margin-top:40px;
+}
+.foot-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}
+.foot-brand img{height:44px;background:#fff;border-radius:12px;padding:6px;margin-bottom:16px}
+.foot-brand p{font-size:14px;max-width:32ch}
+footer h5{font-family:var(--font-display);color:#fff;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+footer a{display:block;color:#B9CCDD;text-decoration:none;font-size:14.5px;margin:9px 0;transition:color .2s}
+footer a:hover{color:var(--sky)}
+.foot-bottom{max-width:1120px;margin:56px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;align-items:center}
+.foot-legal{display:flex;gap:18px;flex-wrap:wrap}
+.foot-legal a{display:inline;margin:0}
+
+@media(max-width:920px){
+  .foot-grid{grid-template-columns:1fr 1fr}
+  nav{
+    position:absolute;top:calc(100% + 10px);right:0;
+    flex-direction:column;align-items:stretch;
+    background:#fff;border-radius:24px;padding:12px;
+    border:1px solid rgba(27,117,188,.12);
+    box-shadow:var(--shadow);
+    display:none;min-width:220px;
+  }
+  nav.open{display:flex}
+  nav a{padding:12px 16px}
+  .menu-btn{display:block}
+}
+@media(max-width:720px){
+  .page{padding:120px 18px 60px}
+}
+@media(max-width:560px){
+  .foot-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="index.html">
+    <img src="km-logo.jpg" alt="KornerMart logo">
+    <span>KORNER<b>MART</b></span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="nav">
+    <a href="index.html#about">Who We Are</a>
+    <a href="index.html#locations">Locations</a>
+    <a href="index.html#rewards">KM Rewards</a>
+    <a href="index.html#careers">Careers</a>
+    <a class="cta" href="apply.html">Apply now</a>
+  </nav>
+</header>
+
+<main class="page legal">
+  <div class="eyebrow">Legal</div>
+  <h1>Terms &amp; Conditions</h1>
+  <p class="lead">These Terms govern your use of the KornerMart website, including our store directory, careers pages, and employment application. They do not replace in-store policies that apply when you buy fuel or merchandise at a location.</p>
+  <p class="effective">Effective date: August 13, 2026</p>
+
+  <nav class="toc" aria-label="Terms contents">
+    <h2>On this page</h2>
+    <ol>
+      <li><a href="#acceptance">Acceptance</a></li>
+      <li><a href="#eligibility">Eligibility and responsibilities</a></li>
+      <li><a href="#use">Permitted and prohibited use</a></li>
+      <li><a href="#stores">Stores, pricing, and payments</a></li>
+      <li><a href="#rewards">KM Rewards</a></li>
+      <li><a href="#applications">Employment applications</a></li>
+      <li><a href="#ip">Intellectual property</a></li>
+      <li><a href="#content">User-submitted content</a></li>
+      <li><a href="#third-party">Third-party links and services</a></li>
+      <li><a href="#disclaimers">Disclaimers</a></li>
+      <li><a href="#liability">Limitation of liability</a></li>
+      <li><a href="#indemnity">Indemnification</a></li>
+      <li><a href="#termination">Suspension and termination</a></li>
+      <li><a href="#law">Governing law and disputes</a></li>
+      <li><a href="#changes">Changes</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="acceptance">1. Acceptance of these Terms</h2>
+  <p>By accessing kornermart.com or any page we operate (the “Site”), you agree to these Terms &amp; Conditions (the “Terms”). If you do not agree, do not use the Site.</p>
+  <p>Submitting an employment application is an additional agreement that the information you provide is true and complete, as described in Section 6. Agreeing to these Terms is not consent to receive promotional emails. Marketing emails are optional and require a separate, unchecked consent box where offered. Our <a href="privacy.html">Privacy Policy</a> explains how we handle personal information.</p>
+
+  <h2 id="eligibility">2. Eligibility and responsibilities</h2>
+  <p>The Site is intended for a general audience in the United States. You must be able to form a binding contract to use the Site. Job applicants must be legally authorized to work in the United States if hired, and employment of anyone under 18 is subject to verification of minimum legal age.</p>
+  <p>The Site does not currently offer customer accounts. If KM Rewards or fleet accounts launch later, you will be responsible for keeping any login credentials confidential and for activity under your account. You agree to provide accurate information and to update it when it changes.</p>
+
+  <h2 id="use">3. Permitted and prohibited website use</h2>
+  <p>You may use the Site to learn about KornerMart locations, view posted job openings, and submit an application for yourself. You agree not to:</p>
+  <ul>
+    <li>Use the Site for any unlawful purpose</li>
+    <li>Submit an application with false, misleading, or impersonated information</li>
+    <li>Upload malware, scrape the Site in a way that impairs it, or attempt to gain unauthorized access to our systems, applications, or resume files</li>
+    <li>Interfere with other users or with the operation of the Site</li>
+    <li>Copy, republish, or commercially exploit Site content except as allowed by these Terms or by law</li>
+    <li>Use automated tools to submit applications or overwhelm our forms</li>
+    <li>Collect personal information of other applicants or visitors</li>
+  </ul>
+  <p>We may monitor the Site for security and abuse, including filtering obvious spam submissions.</p>
+
+  <h2 id="stores">4. Products, services, pricing, and payments</h2>
+  <p>KornerMart operates gas stations and convenience stores in Southern Utah. Fuel grades, merchandise, hours, and amenities vary by location and may change without notice.</p>
+  <p><strong>Prices on the Site are illustrative unless we say otherwise.</strong> Posted sample fuel prices are not an offer and may not match the price on the pump. The price at the dispenser or register at the time of purchase controls. We may correct errors in listed prices or descriptions.</p>
+  <p>This Site does not currently process online payments. Purchases of fuel and in-store merchandise are made at KornerMart locations using the payment methods accepted at that store. Payment-card networks, fuel-brand programs (such as Chevron, Texaco, or Sinclair), and fleet-card issuers have their own terms.</p>
+  <h3>Refunds, cancellations, and delivery</h3>
+  <ul>
+    <li><strong>Fuel</strong> that has been dispensed is generally not returnable. If a pump malfunctions or you believe you were charged incorrectly, speak with the store or email <a href="mailto:hello@kornermart.com">hello@kornermart.com</a> so we can review the transaction.</li>
+    <li><strong>In-store merchandise</strong> returns and exchanges are handled at the store according to that location’s policy, applicable law, and the condition of the goods. Receipts help us process a request.</li>
+    <li><strong>Delivery.</strong> The Site does not offer shipping. We do not currently sell products for home delivery through this website.</li>
+    <li><strong>Job applications</strong> may be withdrawn by emailing <a href="mailto:careers@kornermart.com">careers@kornermart.com</a>. Submitting an application does not create a job offer or an employment contract.</li>
+  </ul>
+
+  <h2 id="rewards">5. KM Rewards</h2>
+  <p>KM Rewards, KM Plus, and KM Fleet are described on the Site as coming soon. Point calculations, tier benefits, and enrollment buttons on the Site are previews only and are not a current offer to enroll, earn, or redeem. When the program launches, separate program terms will apply, and we will not use your job-application information for loyalty marketing unless you give separate promotional consent.</p>
+
+  <h2 id="applications">6. Employment applications</h2>
+  <p>By submitting an application, you certify that the information is true and complete to the best of your knowledge. False or misleading statements may result in rejection of your application or, if discovered later, termination of employment.</p>
+  <p>You authorize KornerMart LLC to verify the information in the application and to contact references and prior employers as you indicate on the form. A criminal conviction is not an automatic bar to employment. We consider the nature of the offense, when it occurred, the surrounding circumstances, and its relation to the position.</p>
+  <p>KornerMart LLC is an equal opportunity employer and complies with the Americans with Disabilities Act. We consider reasonable accommodations that may be necessary for eligible applicants or employees to perform essential job functions. A job offer may be contingent on skill or agility and may include a medical examination conducted by a licensed medical professional, and a controlled-substance test where permitted by law.</p>
+  <p>Employment, if offered, is at-will under Utah law unless a written agreement signed by an authorized KornerMart LLC representative states otherwise. Nothing on the Site — including job descriptions, pay ranges, or these Terms — is a promise of employment, duration, compensation, or benefits.</p>
+  <p>You may submit only your own application. Do not include Social Security numbers, bank-account numbers, or similarly sensitive identifiers in a resume unless we later ask for them as part of hiring.</p>
+
+  <h2 id="ip">7. Intellectual-property ownership</h2>
+  <p>The Site, including text, graphics, logos, layout, and the KornerMart name and brand, is owned by KornerMart LLC or its licensors and is protected by intellectual-property laws. Fuel-brand names and marks (including Chevron, Texaco, and Sinclair) are the property of their owners. You may view and print pages for personal, non-commercial use. You may not use our marks in a way that suggests sponsorship or endorsement without our written permission.</p>
+
+  <h2 id="content">8. User-submitted content</h2>
+  <p>If you submit an application, resume, or other materials, you grant KornerMart LLC a non-exclusive, worldwide, royalty-free license to use, store, copy, and share that content as needed to evaluate your candidacy, contact you, and keep records, as described in the Privacy Policy. You represent that you have the right to submit the materials and that they do not infringe others’ rights or contain malicious code.</p>
+  <p>We may decline, delete, or retain submissions as required for hiring, security, or legal reasons. We are not obligated to post user content publicly; the careers form is for hiring, not public comments.</p>
+
+  <h2 id="third-party">9. Third-party links and services</h2>
+  <p>The Site may link to Google Maps, fuel-brand sites, social platforms, or other third-party services. Those sites have their own terms and privacy practices. We are not responsible for their content, availability, or handling of your information. Directions links are provided for convenience and may not reflect road closures or the fastest route.</p>
+  <p>The employment application is processed using third-party hosting and database services. Your use of those services through our form is for the purpose of sending your application to KornerMart.</p>
+
+  <h2 id="disclaimers">10. Disclaimers</h2>
+  <p>THE SITE IS PROVIDED “AS IS” AND “AS AVAILABLE.” TO THE FULLEST EXTENT PERMITTED BY LAW, KornerMart LLC DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SITE WILL BE UNINTERRUPTED, ERROR-FREE, OR FREE OF HARMFUL COMPONENTS, OR THAT INFORMATION ON THE SITE (INCLUDING HOURS, AMENITIES, JOB OPENINGS, OR SAMPLE PRICES) IS COMPLETE OR CURRENT.</p>
+  <p>Some jurisdictions do not allow certain warranty disclaimers. In those places, the disclaimer applies to the maximum extent permitted.</p>
+
+  <h2 id="liability">11. Limitation of liability</h2>
+  <p>TO THE FULLEST EXTENT PERMITTED BY LAW, KornerMart LLC AND ITS MEMBERS, EMPLOYEES, AND AGENTS WILL NOT BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, OR FOR LOST PROFITS, LOST DATA, OR BUSINESS INTERRUPTION, ARISING OUT OF YOUR USE OF THE SITE, EVEN IF WE HAVE BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+  <p>OUR TOTAL LIABILITY FOR CLAIMS ARISING OUT OF THE SITE WILL NOT EXCEED ONE HUNDRED U.S. DOLLARS (US $100), EXCEPT WHERE LIABILITY CANNOT BE LIMITED UNDER APPLICABLE LAW (INCLUDING LIABILITY FOR FRAUD OR FOR PERSONAL INJURY CAUSED BY OUR NEGLIGENCE WHERE SUCH A LIMIT IS NOT ALLOWED).</p>
+  <p>These limits do not affect rights you have as a consumer under mandatory law, or claims arising from an in-store purchase to the extent those claims are governed by other law or store policy.</p>
+
+  <h2 id="indemnity">12. Indemnification</h2>
+  <p>You agree to defend, indemnify, and hold harmless KornerMart LLC and its members, employees, and agents from claims, damages, losses, and reasonable attorneys’ fees arising out of your misuse of the Site, your violation of these Terms, or your submission of content that is false or that infringes someone else’s rights. We may assume exclusive defense of any matter subject to indemnification, at your expense, and you agree to cooperate.</p>
+
+  <h2 id="termination">13. Suspension and termination</h2>
+  <p>We may suspend or stop providing the Site, refuse an application, or block further submissions if we believe you have violated these Terms, submitted fraudulent materials, or created a security or legal risk. Provisions that by their nature should survive — including intellectual property, disclaimers, limitation of liability, indemnification, and governing law — will survive termination.</p>
+
+  <h2 id="law">14. Governing law and dispute resolution</h2>
+  <p>These Terms are governed by the laws of the State of Utah, without regard to conflict-of-law rules. Except where prohibited, you and KornerMart LLC agree that courts located in Washington County, Utah will have exclusive jurisdiction over disputes arising out of the Site or these Terms, and you consent to personal jurisdiction there.</p>
+  <p>Before filing a claim, please contact us so we can try to resolve the issue. Nothing in this section limits your right to file a complaint with a government agency.</p>
+
+  <h2 id="changes">15. Changes to these Terms</h2>
+  <p>We may update these Terms from time to time. The “Effective date” shows when they were last revised. Material changes will be posted on this page. If you continue to use the Site after the updated Terms become effective, you accept the revised Terms. If you do not agree, stop using the Site.</p>
+
+  <h2 id="contact">16. Company contact information</h2>
+  <ul>
+    <li>KornerMart LLC</li>
+    <li>1572 S Convention Center Dr, St. George, UT 84790</li>
+    <li>General: <a href="mailto:hello@kornermart.com">hello@kornermart.com</a></li>
+    <li>Careers: <a href="mailto:careers@kornermart.com">careers@kornermart.com</a></li>
+    <li>Fleet: <a href="mailto:fleet@kornermart.com">fleet@kornermart.com</a></li>
+  </ul>
+  <p>How we collect and use personal information is described in our <a href="privacy.html">Privacy Policy</a>, not in these Terms.</p>
+
+  <p class="disclaimer">These Terms describe how visitors may use the KornerMart website. They are not legal advice and should be reviewed by qualified counsel, especially for employment applications and in-store consumer transactions.</p>
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="km-logo.jpg" alt="KornerMart">
+      <p>Family-owned gas stations and convenience stores serving Southern Utah.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <a href="index.html#about">Who We Are</a>
+      <a href="index.html#locations">Locations</a>
+      <a href="index.html#rewards">KM Rewards</a>
+      <a href="index.html#careers">Careers</a>
+    </div>
+    <div>
+      <h5>Legal</h5>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="apply.html">Apply now</a>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <a href="mailto:hello@kornermart.com">hello@kornermart.com</a>
+      <a href="mailto:careers@kornermart.com">careers@kornermart.com</a>
+      <a href="mailto:fleet@kornermart.com">fleet@kornermart.com</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 KornerMart. All rights reserved.</span>
+    <span class="foot-legal">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const nav = document.getElementById('nav');
+menuBtn.addEventListener('click', ()=>{
+  const open = nav.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
+});
+nav.addEventListener('click', e=>{ if(e.target.tagName==='A'){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }});
+</script>
+</body>
+</html>

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apply — KornerMart Careers</title>
+<meta name="description" content="Apply to one or more KornerMart roles across Southern Utah with a single application.">
+<link rel="icon" type="image/jpeg" href="km-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1B75BC;
+  --sky:#2FA8E1;
+  --red:#E31E26;
+  --red-deep:#A50E14;
+  --ink:#0B2540;
+  --ink-soft:#4A6580;
+  --ice:#F2F8FD;
+  --white:#FFFFFF;
+  --radius:28px;
+  --shadow:0 20px 50px -20px rgba(11,37,64,.18);
+  --font-display:'Sora',sans-serif;
+  --font-body:'Instrument Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:linear-gradient(180deg,#F7FBFE 0%,#fff 280px);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+::selection{background:var(--sky);color:#fff}
+
+header{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);
+  width:min(1120px,calc(100% - 32px));
+  z-index:50;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(27,117,188,.12);
+  border-radius:999px;
+  box-shadow:0 8px 30px -12px rgba(11,37,64,.15);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px 10px 20px;
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:38px;width:auto;display:block}
+.brand span{font-family:var(--font-display);font-weight:800;font-size:17px;color:var(--ink);letter-spacing:.02em}
+.brand span b{color:var(--blue);font-weight:800}
+nav{display:flex;align-items:center;gap:4px}
+nav a{
+  text-decoration:none;color:var(--ink-soft);
+  font-weight:600;font-size:14.5px;
+  padding:9px 14px;border-radius:999px;
+  transition:color .2s,background .2s;
+}
+nav a:hover{color:var(--blue);background:var(--ice)}
+nav a.cta{
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  color:#fff;margin-left:6px;
+  box-shadow:0 6px 18px -6px rgba(27,117,188,.55);
+}
+nav a.cta:hover{filter:brightness(1.08);color:#fff}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px}
+
+.page{
+  max-width:860px;margin:0 auto;
+  padding:140px 24px 80px;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);
+  background:var(--ice);
+  border:1px solid rgba(27,117,188,.15);
+  padding:8px 18px;border-radius:999px;
+  margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red)}
+h1{
+  font-family:var(--font-display);font-weight:800;
+  font-size:clamp(34px,5vw,52px);letter-spacing:-.02em;line-height:1.1;
+  margin-bottom:12px;
+}
+.lead{color:var(--ink-soft);font-size:17.5px;max-width:52ch;margin-bottom:28px}
+.preselect{
+  display:none;
+  background:#E8F4FC;border:1px solid rgba(27,117,188,.2);
+  color:var(--blue);font-weight:600;font-size:14.5px;
+  padding:12px 16px;border-radius:16px;margin-bottom:22px;
+}
+.preselect.show{display:block}
+
+.form-card{
+  background:#fff;border-radius:var(--radius);
+  padding:36px 34px 40px;
+  border:1px solid rgba(27,117,188,.1);
+  box-shadow:var(--shadow);
+}
+h2.block{
+  font-family:var(--font-display);font-weight:800;font-size:20px;
+  margin:34px 0 18px;letter-spacing:-.02em;
+}
+h2.block:first-child{margin-top:0}
+.note{
+  font-size:13px;color:var(--ink-soft);line-height:1.55;
+  margin:8px 0 0;
+}
+
+.grid-3,.grid-2,.addr-grid{display:grid;gap:16px}
+.grid-3{grid-template-columns:1fr 1fr 1fr}
+.grid-2{grid-template-columns:1fr 1fr}
+.addr-grid{grid-template-columns:1.15fr .85fr;align-items:start}
+.addr-stack,.addr-right{display:grid;gap:16px}
+.addr-right{grid-template-columns:1fr 1fr}
+.addr-right .zip{grid-column:1 / -1}
+
+.field label,.q > span,.file-label{
+  display:block;font-weight:600;font-size:14px;margin-bottom:7px;
+}
+.req{color:var(--red)}
+.field input,.field textarea,.field select,.file-drop{
+  width:100%;background:var(--ice);
+  border:1.5px solid rgba(27,117,188,.12);
+  border-radius:14px;padding:13px 15px;
+  font:inherit;color:var(--ink);outline:none;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+}
+.field textarea{min-height:96px;resize:vertical}
+.field select{
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%231B75BC' d='M1 1l5 5 5-5'/></svg>");
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+  padding-right:40px;
+  cursor:pointer;
+}
+.field input:focus,.field textarea:focus,.field select:focus,.file-drop:focus-within{
+  border-color:var(--blue);background:#fff;
+  box-shadow:0 0 0 4px rgba(27,117,188,.12);
+}
+.field.error input,.field.error textarea,.field.error select,.q.error .yn{
+  border-color:var(--red);
+}
+.err{
+  display:none;color:var(--red);font-size:13px;font-weight:600;margin-top:6px;
+}
+.field.error .err,.q.error .err,.pos-wrap.error .err,.terms-row.error + .err{display:block}
+.privacy-notice{
+  background:#E8F4FC;border:1px solid rgba(27,117,188,.18);
+  border-radius:16px;padding:14px 16px;margin:0 0 8px;
+  font-size:14px;color:var(--ink-soft);line-height:1.55;
+}
+.privacy-notice a{color:var(--blue);font-weight:600}
+
+.pos-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pos{
+  display:flex;gap:10px;align-items:center;
+  background:var(--ice);border:1.5px solid transparent;
+  padding:13px 14px;border-radius:16px;cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.pos:hover{border-color:rgba(27,117,188,.25)}
+.pos:has(input:checked){border-color:var(--blue);background:#E8F4FC}
+.pos input{accent-color:var(--blue);flex:none}
+.pos b{display:block;font-size:14.5px;font-weight:700;line-height:1.25}
+.pos small{display:block;color:var(--ink-soft);font-size:12.5px;font-weight:500}
+.other-row{margin-top:12px;display:none}
+.other-row.show{display:block}
+
+.q{margin:0 0 22px}
+.q > span{margin-bottom:10px}
+.yn{display:flex;gap:10px}
+.yn label{
+  display:flex;align-items:center;gap:8px;
+  background:var(--ice);border:1.5px solid rgba(27,117,188,.12);
+  padding:9px 18px;border-radius:999px;cursor:pointer;font-weight:600;
+}
+.yn input{accent-color:var(--blue)}
+.yn label:has(input:checked){
+  border-color:var(--blue);background:#E8F4FC;color:var(--blue);
+}
+.reveal-field{display:none;margin-top:12px}
+.reveal-field.show{display:block}
+
+.file-drop{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  cursor:pointer;padding:16px 18px;
+}
+.file-drop strong{display:block;font-size:14.5px}
+.file-drop span{color:var(--ink-soft);font-size:13px}
+.file-drop input{position:absolute;opacity:0;pointer-events:none}
+
+.terms-row{
+  display:flex;gap:12px;align-items:flex-start;
+  margin:8px 0 22px;font-size:14.5px;color:var(--ink-soft);
+}
+.terms-row input{accent-color:var(--blue);margin-top:4px;flex:none}
+.terms-row a{color:var(--blue);font-weight:600}
+
+.btn{
+  font-family:var(--font-body);font-weight:600;font-size:16px;
+  padding:16px 30px;border-radius:16px;border:none;cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .2s,box-shadow .2s,filter .2s,opacity .2s;
+  width:100%;
+}
+.btn:active{transform:scale(.98)}
+.btn-apply{
+  background:linear-gradient(135deg,var(--red),var(--red-deep));color:#fff;
+  box-shadow:0 12px 30px -8px rgba(227,30,38,.5);
+}
+.btn-apply:hover{filter:brightness(1.06)}
+.btn-apply:disabled{opacity:.65;cursor:wait;transform:none}
+.terms-foot{
+  text-align:center;font-size:13px;color:var(--ink-soft);margin-top:14px;
+}
+.terms-foot a{color:var(--blue);font-weight:600}
+.terms-row.optional{margin-top:-4px}
+
+.success{
+  display:none;text-align:center;padding:48px 20px;
+}
+.success.show{display:block}
+.success h2{font-family:var(--font-display);font-size:32px;margin:12px 0 10px}
+.success p{color:var(--ink-soft);max-width:42ch;margin:0 auto 22px}
+.btn-primary{
+  background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;
+  width:auto;border-radius:999px;padding:14px 26px;
+}
+
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+
+footer{
+  background:var(--ink);color:#B9CCDD;
+  border-radius:64px 64px 0 0;
+  padding:80px 24px 36px;margin-top:40px;
+}
+.foot-grid{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}
+.foot-brand img{height:44px;background:#fff;border-radius:12px;padding:6px;margin-bottom:16px}
+.foot-brand p{font-size:14px;max-width:32ch}
+footer h5{font-family:var(--font-display);color:#fff;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+footer a{display:block;color:#B9CCDD;text-decoration:none;font-size:14.5px;margin:9px 0;transition:color .2s}
+footer a:hover{color:var(--sky)}
+.foot-bottom{max-width:1120px;margin:56px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;align-items:center}
+.foot-legal{display:flex;gap:18px;flex-wrap:wrap}
+.foot-legal a{display:inline;margin:0}
+
+#toast{
+  position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);
+  background:var(--ink);color:#fff;padding:13px 24px;border-radius:999px;
+  font-size:14px;font-weight:500;z-index:99;opacity:0;transition:.4s;pointer-events:none;
+}
+#toast.show{transform:translate(-50%,0);opacity:1}
+
+@media(max-width:920px){
+  .foot-grid{grid-template-columns:1fr 1fr}
+  nav{
+    position:absolute;top:calc(100% + 10px);right:0;
+    flex-direction:column;align-items:stretch;
+    background:#fff;border-radius:24px;padding:12px;
+    border:1px solid rgba(27,117,188,.12);
+    box-shadow:var(--shadow);
+    display:none;min-width:220px;
+  }
+  nav.open{display:flex}
+  nav a{padding:12px 16px}
+  .menu-btn{display:block}
+}
+@media(max-width:720px){
+  .grid-3,.grid-2,.addr-grid,.addr-right,.pos-grid{grid-template-columns:1fr}
+  .addr-right .zip{grid-column:auto}
+  .form-card{padding:24px 18px 28px}
+  .page{padding:120px 18px 60px}
+}
+@media(max-width:560px){
+  .foot-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="index.html">
+    <img src="km-logo.jpg" alt="KornerMart logo">
+    <span>KORNER<b>MART</b></span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <nav id="nav">
+    <a href="index.html#about">Who We Are</a>
+    <a href="index.html#locations">Locations</a>
+    <a href="index.html#rewards">KM Rewards</a>
+    <a href="index.html#careers">Careers</a>
+    <a class="cta" href="apply.html">Apply now</a>
+  </nav>
+</header>
+
+<main class="page">
+  <div class="eyebrow">Careers</div>
+  <h1>Employment application</h1>
+  <p class="lead">Complete one application and select every position you would like to be considered for. We will review you for each role you choose.</p>
+  <div class="preselect" id="preselect"></div>
+
+  <div class="form-card" id="formCard">
+    <form id="applyForm" novalidate>
+      <p class="hp" aria-hidden="true"><label>Company website <input type="text" name="company_website" tabindex="-1" autocomplete="off"></label></p>
+
+      <aside class="privacy-notice">
+        We collect your name, email address, telephone number, mailing address, resume (if you attach one), and the employment information you include in this form to evaluate your application and contact you about KornerMart roles. We may use service providers to process this information on our behalf. For details about retention, disclosures, and your privacy rights, please review our <a href="privacy.html">Privacy Policy</a>.
+      </aside>
+
+      <h2 class="block">Contact information</h2>
+      <div class="grid-3">
+        <div class="field" data-req="last_name">
+          <label for="last_name">Last Name <span class="req">*</span></label>
+          <input id="last_name" name="last_name" placeholder="Last name" autocomplete="family-name">
+          <div class="err">This field is required.</div>
+        </div>
+        <div class="field" data-req="first_name">
+          <label for="first_name">First Name <span class="req">*</span></label>
+          <input id="first_name" name="first_name" placeholder="First name" autocomplete="given-name">
+          <div class="err">This field is required.</div>
+        </div>
+        <div class="field">
+          <label for="middle_name">Middle Name</label>
+          <input id="middle_name" name="middle_name" placeholder="Middle name" autocomplete="additional-name">
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="field" data-req="phone">
+          <label for="phone">Phone <span class="req">*</span></label>
+          <input id="phone" name="phone" type="tel" placeholder="(435) 555-0100" autocomplete="tel">
+          <div class="err">This field is required.</div>
+        </div>
+        <div class="field" data-req="email">
+          <label for="email">Email <span class="req">*</span></label>
+          <input id="email" name="email" type="email" placeholder="you@email.com" autocomplete="email">
+          <div class="err">Enter a valid email.</div>
+        </div>
+      </div>
+
+      <h2 class="block">Current Address</h2>
+      <div class="addr-grid">
+        <div class="addr-stack">
+          <div class="field">
+            <label for="address_line1">Street Address Line 1</label>
+            <input id="address_line1" name="address_line1" placeholder="Street Address Line 1" autocomplete="address-line1">
+          </div>
+          <div class="field">
+            <label for="address_line2">Street Address Line 2</label>
+            <input id="address_line2" name="address_line2" placeholder="Street Address Line 2" autocomplete="address-line2">
+          </div>
+        </div>
+        <div class="addr-right">
+          <div class="field">
+            <label for="city">City</label>
+            <input id="city" name="city" placeholder="City" autocomplete="address-level2">
+          </div>
+          <div class="field">
+            <label for="state">State</label>
+            <input id="state" name="state" placeholder="State" autocomplete="address-level1">
+          </div>
+          <div class="field zip">
+            <label for="zip">Zip Code</label>
+            <input id="zip" name="zip" placeholder="Zip Code" autocomplete="postal-code">
+          </div>
+        </div>
+      </div>
+
+      <h2 class="block">Positions applying for <span class="req">*</span></h2>
+      <div class="pos-wrap">
+        <div class="pos-grid" id="posGrid"></div>
+        <label class="pos" style="margin-top:10px">
+          <input type="checkbox" name="position_other" id="positionOther" value="Other">
+          <span><b>Other</b><small>Describe the role if it is not listed</small></span>
+        </label>
+        <div class="field other-row" id="otherRow">
+          <label for="other_position">If other, please specify</label>
+          <input id="other_position" name="other_position" placeholder="Position title">
+        </div>
+        <div class="err">Please select at least one position.</div>
+      </div>
+
+      <h2 class="block">Preferred location <span class="req">*</span></h2>
+      <div class="field" data-req="preferred_location">
+        <label for="preferred_location">Store</label>
+        <select id="preferred_location" name="preferred_location">
+          <option value="">Select a store</option>
+        </select>
+        <div class="err">Please choose a store.</div>
+      </div>
+
+      <h2 class="block">Resume</h2>
+      <label class="file-drop" id="fileDrop">
+        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx,application/pdf">
+        <div>
+          <strong id="fileName">Attach a resume</strong>
+          <span>PDF or Word, up to 10 MB. Optional for cashier roles.</span>
+        </div>
+      </label>
+
+      <h2 class="block">Personal Information</h2>
+
+      <div class="q" data-radio="transportation">
+        <span>If hired, would you have transportation to/from work? <span class="req">*</span></span>
+        <div class="yn">
+          <label><input type="radio" name="transportation" value="Y"> Yes</label>
+          <label><input type="radio" name="transportation" value="N"> No</label>
+        </div>
+        <div class="err">This field is required.</div>
+      </div>
+      <div class="q" data-radio="over_21">
+        <span>Are you 21 years of age or older? (Employment of anyone under 18 is subject to verification of minimum legal age.) <span class="req">*</span></span>
+        <div class="yn">
+          <label><input type="radio" name="over_21" value="Y"> Yes</label>
+          <label><input type="radio" name="over_21" value="N"> No</label>
+        </div>
+        <div class="err">This field is required.</div>
+      </div>
+      <div class="q" data-radio="work_authorization">
+        <span>If hired, would you be able to present evidence of your U.S. citizenship or proof of your legal right to work in the United States? <span class="req">*</span></span>
+        <div class="yn">
+          <label><input type="radio" name="work_authorization" value="Y"> Yes</label>
+          <label><input type="radio" name="work_authorization" value="N"> No</label>
+        </div>
+        <div class="err">This field is required.</div>
+      </div>
+      <div class="q" data-radio="drug_test">
+        <span>If hired, are you willing to submit to and pass a controlled-substance test? <span class="req">*</span></span>
+        <div class="yn">
+          <label><input type="radio" name="drug_test" value="Y"> Yes</label>
+          <label><input type="radio" name="drug_test" value="N"> No</label>
+        </div>
+        <div class="err">This field is required.</div>
+      </div>
+      <div class="q" data-radio="essential_functions">
+        <span>Are you able to perform the essential functions of the job for which you are applying, with or without reasonable accommodation? <span class="req">*</span></span>
+        <div class="yn">
+          <label><input type="radio" name="essential_functions" value="Y"> Yes</label>
+          <label><input type="radio" name="essential_functions" value="N"> No</label>
+        </div>
+        <div class="err">This field is required.</div>
+      </div>
+      <div class="field reveal-field" id="essentialNotes">
+        <label for="essential_functions_notes">If no, please describe the functions that cannot be performed</label>
+        <textarea id="essential_functions_notes" name="essential_functions_notes" placeholder="Please describe"></textarea>
+      </div>
+      <p class="note" id="adaNoteAlways" style="margin:-8px 0 22px">KornerMart complies with the Americans with Disabilities Act and considers reasonable accommodations that may be necessary for eligible applicants or employees to perform essential job functions. A job offer may be contingent on skill or agility and may include a medical examination conducted by a licensed medical professional.</p>
+
+      <div class="q" data-radio="convicted">
+        <span>Have you ever been convicted of a criminal offense (felony or misdemeanor) other than a minor traffic violation? <span class="req">*</span></span>
+        <div class="yn">
+          <label><input type="radio" name="convicted" value="Y"> Yes</label>
+          <label><input type="radio" name="convicted" value="N"> No</label>
+        </div>
+        <div class="err">This field is required.</div>
+      </div>
+      <div class="field reveal-field" id="convictionNotes">
+        <label for="conviction_notes">If yes, please describe the offense — including the nature of the crime(s), when and where you were convicted, and the disposition of the case.</label>
+        <textarea id="conviction_notes" name="conviction_notes" placeholder="Please describe"></textarea>
+        <p class="note">A conviction does not automatically disqualify you from employment. We consider the date and nature of the offense, the surrounding circumstances, and how it relates to the position(s) you are applying for.</p>
+      </div>
+
+      <h2 class="block">Education, Training and Experience</h2>
+      <div class="field">
+        <label for="education">Please summarize your education, training, and relevant experience</label>
+        <textarea id="education" name="education" placeholder="Schools attended, certifications, and work experience"></textarea>
+      </div>
+      <div class="q" data-radio="extra_skills" style="margin-top:22px">
+        <span>Do you have additional experience, training, qualifications, or skills that make you especially well suited for this work? <span class="req">*</span></span>
+        <div class="yn">
+          <label><input type="radio" name="extra_skills" value="Y"> Yes</label>
+          <label><input type="radio" name="extra_skills" value="N"> No</label>
+        </div>
+        <div class="err">This field is required.</div>
+      </div>
+      <div class="field reveal-field" id="extraSkillsNotes">
+        <label for="extra_skills_notes">If yes, please explain</label>
+        <textarea id="extra_skills_notes" name="extra_skills_notes" placeholder="Please explain"></textarea>
+      </div>
+
+      <h2 class="block">Employment History</h2>
+      <div class="q" data-radio="currently_employed">
+        <span>Are you currently employed? <span class="req">*</span></span>
+        <div class="yn">
+          <label><input type="radio" name="currently_employed" value="Y"> Yes</label>
+          <label><input type="radio" name="currently_employed" value="N"> No</label>
+        </div>
+        <div class="err">This field is required.</div>
+      </div>
+      <div class="field reveal-field" id="employmentDetails">
+        <label for="employment_details">If yes, please provide details</label>
+        <textarea id="employment_details" name="employment_details" placeholder="Employer, role, and dates"></textarea>
+      </div>
+      <div class="q reveal-field" id="contactEmployerQ" data-radio="contact_employer">
+        <span>If you are currently employed, may we contact your current employer?</span>
+        <div class="yn">
+          <label><input type="radio" name="contact_employer" value="Y"> Yes</label>
+          <label><input type="radio" name="contact_employer" value="N"> No</label>
+        </div>
+      </div>
+      <div class="field reveal-field" id="contactEmployerDetails">
+        <label for="contact_employer_details">If yes, please provide details</label>
+        <textarea id="contact_employer_details" name="contact_employer_details" placeholder="Best person to contact and any notes"></textarea>
+      </div>
+
+      <label class="terms-row" data-req="terms">
+        <input type="checkbox" name="terms" id="terms">
+        <span>I certify that the information in this application is true and complete, and I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>. I have reviewed the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+      </label>
+      <div class="err" style="margin:-12px 0 16px 28px">Please agree to the Terms &amp; Conditions before submitting.</div>
+
+      <label class="terms-row optional">
+        <input type="checkbox" name="marketing" id="marketing">
+        <span>I agree to receive promotional emails from KornerMart. I can unsubscribe at any time. This is optional and is not required to apply.</span>
+      </label>
+
+      <button class="btn btn-apply" type="submit" id="submitBtn">Submit application</button>
+      <p class="terms-foot">Read our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms &amp; Conditions</a> before you submit.</p>
+    </form>
+  </div>
+
+  <div class="success" id="success">
+    <div class="eyebrow">Application received</div>
+    <h2>Thank you, <span id="thanksName"></span>.</h2>
+    <p id="thanksBody">We have received your application and will be in touch if there is a match. You may submit another application if you would like to be considered for additional roles later.</p>
+    <a class="btn btn-primary" href="index.html#careers">View open positions</a>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <img src="km-logo.jpg" alt="KornerMart">
+      <p>Family-owned gas stations and convenience stores serving Southern Utah.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <a href="index.html#about">Who We Are</a>
+      <a href="index.html#locations">Locations</a>
+      <a href="index.html#rewards">KM Rewards</a>
+      <a href="index.html#careers">Careers</a>
+    </div>
+    <div>
+      <h5>Locations</h5>
+      <a href="index.html#locations">St. George</a>
+      <a href="index.html#locations">Cedar City</a>
+      <a href="index.html#locations">Helper</a>
+      <a href="index.html#locations">Apple Valley</a>
+      <a href="index.html#locations">Hurricane</a>
+    </div>
+    <div>
+      <h5>Contact</h5>
+      <a href="mailto:hello@kornermart.com">hello@kornermart.com</a>
+      <a href="mailto:careers@kornermart.com">careers@kornermart.com</a>
+      <a href="mailto:fleet@kornermart.com">fleet@kornermart.com</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 KornerMart. All rights reserved.</span>
+    <span class="foot-legal">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms &amp; Conditions</a>
+    </span>
+  </div>
+</footer>
+
+<div id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="jobs.js"></script>
+<script src="supabase-config.js"></script>
+<script>
+const toastEl = document.getElementById('toast');
+let toastT;
+function showToast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(()=>toastEl.classList.remove('show'), 3600);
+}
+
+const menuBtn = document.getElementById('menuBtn');
+const nav = document.getElementById('nav');
+menuBtn.addEventListener('click', ()=>{
+  const open = nav.classList.toggle('open');
+  menuBtn.setAttribute('aria-expanded', open);
+});
+nav.addEventListener('click', e=>{ if(e.target.tagName==='A'){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }});
+
+const posGrid = document.getElementById('posGrid');
+const params = new URLSearchParams(location.search);
+const preJob = params.get('job');
+
+KM_JOBS.forEach(j=>{
+  const id = 'pos-' + j.slug;
+  const lab = document.createElement('label');
+  lab.className = 'pos';
+  lab.innerHTML = `<input type="checkbox" name="positions" value="${j.slug}" id="${id}" data-label="${kmJobLabel(j).replace(/"/g,'&quot;')}">
+    <span><b>${j.title}</b></span>`;
+  posGrid.appendChild(lab);
+});
+
+if(preJob){
+  const j = kmFindJob(preJob);
+  const box = j && document.querySelector(`input[name="positions"][value="${CSS.escape(j.slug)}"]`);
+  if(box){
+    box.checked = true;
+    const banner = document.getElementById('preselect');
+    banner.textContent = 'You are applying for ' + kmJobLabel(j) + '. You may select additional positions below.';
+    banner.classList.add('show');
+  }
+}
+
+const locSelect = document.getElementById('preferred_location');
+KM_LOCATIONS.forEach(l=>{
+  const opt = document.createElement('option');
+  opt.value = l.code;
+  opt.textContent = kmLocationLabel(l);
+  locSelect.appendChild(opt);
+});
+
+const otherCb = document.getElementById('positionOther');
+const otherRow = document.getElementById('otherRow');
+otherCb.addEventListener('change', ()=> otherRow.classList.toggle('show', otherCb.checked));
+
+function val(name){ return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+function toggle(id, on){ document.getElementById(id).classList.toggle('show', !!on); }
+
+document.querySelectorAll('input[name="essential_functions"]').forEach(r=>{
+  r.addEventListener('change', ()=>{
+    const no = val('essential_functions')==='N';
+    toggle('essentialNotes', no);
+    document.getElementById('adaNoteAlways').style.display = no ? 'none' : '';
+  });
+});
+document.querySelectorAll('input[name="convicted"]').forEach(r=>{
+  r.addEventListener('change', ()=> toggle('convictionNotes', val('convicted')==='Y'));
+});
+document.querySelectorAll('input[name="extra_skills"]').forEach(r=>{
+  r.addEventListener('change', ()=> toggle('extraSkillsNotes', val('extra_skills')==='Y'));
+});
+document.querySelectorAll('input[name="currently_employed"]').forEach(r=>{
+  r.addEventListener('change', ()=>{
+    const yes = val('currently_employed')==='Y';
+    toggle('employmentDetails', yes);
+    toggle('contactEmployerQ', yes);
+    if(!yes){
+      document.querySelectorAll('input[name="contact_employer"]').forEach(x=>x.checked=false);
+      toggle('contactEmployerDetails', false);
+    }
+  });
+});
+document.querySelectorAll('input[name="contact_employer"]').forEach(r=>{
+  r.addEventListener('change', ()=> toggle('contactEmployerDetails', val('contact_employer')==='Y'));
+});
+
+const resumeInput = document.getElementById('resume');
+resumeInput.addEventListener('change', ()=>{
+  const f = resumeInput.files[0];
+  document.getElementById('fileName').textContent = f ? f.name : 'Attach a resume';
+});
+
+document.querySelectorAll('.terms-row a').forEach(a=>{
+  a.addEventListener('click', e=> e.stopPropagation());
+});
+
+function setError(el, on){ el.classList.toggle('error', !!on); }
+
+function validate(){
+  let ok = true;
+  const firstBad = [];
+
+  document.querySelectorAll('.field[data-req]').forEach(field=>{
+    const input = field.querySelector('input,textarea,select');
+    const empty = !input.value.trim();
+    const emailBad = input.type==='email' && input.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+    setError(field, empty || emailBad);
+    if(empty || emailBad){ ok=false; firstBad.push(field); }
+  });
+
+  const posChecked = [...document.querySelectorAll('input[name="positions"]:checked')];
+  const otherOn = otherCb.checked;
+  const posWrap = document.querySelector('.pos-wrap');
+  const posOk = posChecked.length || (otherOn && document.getElementById('other_position').value.trim());
+  setError(posWrap, !posOk);
+  if(!posOk){ ok=false; firstBad.push(posWrap); }
+
+  document.querySelectorAll('.q[data-radio]').forEach(q=>{
+    if(q.id==='contactEmployerQ' && !q.classList.contains('show')) { setError(q,false); return; }
+    const name = q.dataset.radio;
+    const missing = !val(name);
+    setError(q, missing);
+    if(missing){ ok=false; firstBad.push(q); }
+  });
+
+  const terms = document.getElementById('terms');
+  const termsRow = document.querySelector('.terms-row');
+  setError(termsRow, !terms.checked);
+  if(!terms.checked){ ok=false; firstBad.push(termsRow); }
+
+  const file = resumeInput.files[0];
+  if(file){
+    const okType = /\.(pdf|doc|docx)$/i.test(file.name);
+    const okSize = file.size <= 10 * 1024 * 1024;
+    if(!okType || !okSize){
+      ok=false;
+      showToast(!okType ? 'Please attach a PDF or Word document.' : 'Resumes must be 10 MB or smaller.');
+    }
+  }
+
+  if(!ok && firstBad[0]) firstBad[0].scrollIntoView({behavior:'smooth', block:'center'});
+  return ok;
+}
+
+document.getElementById('applyForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(document.querySelector('[name="company_website"]').value) return;
+  if(!validate()) return;
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  try{
+    if(typeof supabase === 'undefined' || !supabase.createClient){
+      throw new Error('Could not reach the application service. Refresh the page and try again.');
+    }
+    if(typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_ANON_KEY === 'undefined'){
+      throw new Error('Application config is missing. Copy supabase-config.example.js to supabase-config.js.');
+    }
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const positions = [...document.querySelectorAll('input[name="positions"]:checked')].map(i=>i.dataset.label);
+    if(otherCb.checked){
+      const spec = document.getElementById('other_position').value.trim();
+      positions.push(spec ? 'Other: ' + spec : 'Other');
+    }
+
+    let resume_path = null, resume_filename = null;
+    const file = resumeInput.files[0];
+    if(file){
+      const ext = file.name.split('.').pop().toLowerCase();
+      const path = `${crypto.randomUUID()}.${ext}`;
+      const { error: upErr } = await client.storage.from('resumes').upload(path, file, {
+        contentType: file.type || 'application/octet-stream',
+        upsert: false
+      });
+      if(upErr) throw upErr;
+      resume_path = path;
+      resume_filename = file.name;
+    }
+
+    const emptyToNull = v => (v && String(v).trim()) ? String(v).trim() : null;
+    const loc = KM_LOCATIONS.find(l=>l.code===document.getElementById('preferred_location').value);
+    const { error } = await client.from('applications').insert({
+      positions,
+      other_position: otherCb.checked ? emptyToNull(document.getElementById('other_position').value) : null,
+      location_code: loc ? loc.code : null,
+      location_name: loc ? loc.city : null,
+      location_address: loc ? loc.addr : null,
+      last_name: document.getElementById('last_name').value.trim(),
+      first_name: document.getElementById('first_name').value.trim(),
+      middle_name: emptyToNull(document.getElementById('middle_name').value),
+      phone: document.getElementById('phone').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      address_line1: emptyToNull(document.getElementById('address_line1').value),
+      address_line2: emptyToNull(document.getElementById('address_line2').value),
+      city: emptyToNull(document.getElementById('city').value),
+      state: emptyToNull(document.getElementById('state').value),
+      zip: emptyToNull(document.getElementById('zip').value),
+      transportation: val('transportation') || null,
+      over_21: val('over_21') || null,
+      work_authorization: val('work_authorization') || null,
+      drug_test: val('drug_test') || null,
+      essential_functions: val('essential_functions') || null,
+      essential_functions_notes: emptyToNull(document.getElementById('essential_functions_notes').value),
+      convicted: val('convicted') || null,
+      conviction_notes: emptyToNull(document.getElementById('conviction_notes').value),
+      education: emptyToNull(document.getElementById('education').value),
+      extra_skills: val('extra_skills') || null,
+      extra_skills_notes: emptyToNull(document.getElementById('extra_skills_notes').value),
+      currently_employed: val('currently_employed') || null,
+      employment_details: emptyToNull(document.getElementById('employment_details').value),
+      contact_employer: val('contact_employer') || null,
+      contact_employer_details: emptyToNull(document.getElementById('contact_employer_details').value),
+      resume_path,
+      resume_filename,
+      terms_accepted: true,
+      marketing_opt_in: document.getElementById('marketing').checked
+    });
+    if(error) throw error;
+
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('preselect').classList.remove('show');
+    document.getElementById('thanksName').textContent = document.getElementById('first_name').value.trim();
+    const roleText = positions.join(', ');
+    const locLabel = loc ? kmLocationLabel(loc) : '';
+    document.getElementById('thanksBody').textContent =
+      `We received your application for ${roleText}${locLabel ? ' at ' + locLabel : ''}. If there is a match, we will contact you at ${document.getElementById('email').value.trim()}.`;
+    document.getElementById('success').classList.add('show');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }catch(err){
+    console.error(err);
+    showToast(err.message || 'Your application could not be submitted. Please try again or email careers@kornermart.com.');
+    btn.disabled = false;
+    btn.textContent = 'Submit application';
+  }
+});
+</script>
+</body>
+</html>

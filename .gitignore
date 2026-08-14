@@ -1,0 +1,21 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Local Supabase API keys (copy from supabase-config.example.js)
+supabase-config.js
+
+# Supabase CLI local files
+supabase/.env
+supabase/.temp/
+.supabase/
+
+# Keys and certificates
+*.pem
+*.key
+!*.example.key
+
+# OS
+.DS_Store
