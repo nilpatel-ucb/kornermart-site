@@ -738,7 +738,7 @@ document.getElementById('applyForm').addEventListener('submit', async e=>{
       throw new Error('Could not reach the application service. Refresh the page and try again.');
     }
     if(typeof SUPABASE_URL === 'undefined' || typeof SUPABASE_ANON_KEY === 'undefined'){
-      throw new Error('Application config is missing. Copy supabase-config.example.js to supabase-config.js.');
+      throw new Error('Application config is missing. supabase-config.js did not load.');
     }
     const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const positions = [...document.querySelectorAll('input[name="positions"]:checked')].map(i=>i.dataset.label);

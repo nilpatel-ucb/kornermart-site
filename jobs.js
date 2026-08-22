@@ -3,6 +3,12 @@ const KM_JOBS = [
   {slug:"regional-manager", title:"Regional Manager", type:"Full-time",
    desc:"Oversee daily operations across multiple KornerMart convenience stores and fuel sites in Utah. This role is accountable for store performance, cleanliness, customer service, compliance, and team development. The ideal candidate is an experienced multi-unit leader who can travel between locations, coach managers, and hold teams to a consistent standard.",
    reqs:["Multi-unit or retail leadership experience","Proven ability to develop people and drive accountability","Willingness to travel between KornerMart locations","Organized, hands-on, and results-oriented"]},
+  {slug:"general-manager", title:"General Manager", type:"Full-time",
+   desc:"Own day-to-day performance of a KornerMart store, including sales, staffing, inventory, fuel operations, cleanliness, and guest experience. Lead the assistant manager and cashier team, hit store targets, and keep the location compliant and well-run. The ideal candidate is a hands-on store leader who can hire, coach, and hold a team accountable.",
+   reqs:["Retail or convenience-store management experience","Proven ability to lead a store team and hit performance targets","Comfort with scheduling, inventory, and vendor coordination","Open availability, including weekends"]},
+  {slug:"assistant-manager", title:"Assistant Manager", type:"Full-time",
+   desc:"Partner with the store manager on scheduling, vendor orders, fuel deliveries, and team development. This is a hands-on leadership role with responsibility for daily store performance.",
+   reqs:["At least two years of retail leadership","Inventory and vendor management experience","Open availability, including weekends"]},
   {slug:"office-administrator", title:"Office Administrator", type:"Full-time",
    desc:"Support day-to-day business operations from our office. Responsibilities include administrative work, basic accounting, payroll support, record keeping, and assisting leadership with reporting and vendor coordination. The ideal candidate is precise, comfortable with numbers, and able to manage several priorities at once.",
    reqs:["Proficiency with Microsoft Office","Comfort with basic accounting and payroll support","Strong attention to detail and organization","Ability to multitask in a fast-paced office"]},
@@ -12,9 +18,6 @@ const KM_JOBS = [
   {slug:"cashier", title:"Cashier", type:"Part-time",
    desc:"Serve guests at the register, restock merchandise, and help keep the store clean and well-run. No prior experience is required; we provide training.",
    reqs:["Flexible availability, including weekends","Strong customer service","No experience required; training provided"]},
-  {slug:"assistant-manager", title:"Assistant Manager", type:"Full-time",
-   desc:"Partner with the store manager on scheduling, vendor orders, fuel deliveries, and team development. This is a hands-on leadership role with responsibility for daily store performance.",
-   reqs:["At least two years of retail leadership","Inventory and vendor management experience","Open availability, including weekends"]},
 ];
 
 function kmJobLabel(j){
