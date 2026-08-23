@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applications — KornerMart Hiring</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Staff hiring inbox for KornerMart job applications.">
+<link rel="icon" type="image/jpeg" href="km-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1B75BC;
+  --sky:#2FA8E1;
+  --red:#E31E26;
+  --red-deep:#A50E14;
+  --ink:#0B2540;
+  --ink-soft:#4A6580;
+  --ice:#F2F8FD;
+  --white:#FFFFFF;
+  --card:18px;
+  --shadow:0 16px 40px -22px rgba(11,37,64,.2);
+  --font-display:'Sora',sans-serif;
+  --font-body:'Instrument Sans',sans-serif;
+  --font-num:'Space Grotesk',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font-body);color:var(--ink);background:var(--ice);min-height:100svh;line-height:1.5}
+::selection{background:var(--sky);color:#fff}
+button,input,select{font:inherit}
+.hidden{display:none !important}
+
+.btn{
+  font-weight:600;border:none;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:999px;padding:10px 16px;text-decoration:none;color:inherit;
+  transition:filter .15s,transform .15s,background .15s,border-color .15s;
+}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-blue{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;box-shadow:0 8px 20px -8px rgba(27,117,188,.5)}
+.btn-blue:hover{filter:brightness(1.06);color:#fff}
+.btn-red{background:linear-gradient(135deg,var(--red),var(--red-deep));color:#fff}
+.btn-red:hover{filter:brightness(1.05);color:#fff}
+.btn-navy{background:var(--blue);color:#fff}
+.btn-navy:hover{filter:brightness(1.08);color:#fff}
+.btn-outline{background:#fff;border:1.5px solid rgba(11,37,64,.12);color:var(--ink)}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+
+#login{min-height:100svh;display:grid;place-items:center;padding:32px 20px}
+.login-card{
+  width:min(420px,100%);background:#fff;border-radius:var(--card);
+  box-shadow:var(--shadow);border:1px solid rgba(27,117,188,.1);padding:36px 32px 28px;
+}
+.login-brand{display:flex;align-items:center;gap:10px;margin-bottom:22px;text-decoration:none;color:inherit}
+.login-brand img{height:40px}
+.login-brand span{font-family:var(--font-display);font-weight:800;font-size:18px}
+.login-brand b{color:var(--blue)}
+.login-card h1{font-family:var(--font-display);font-size:26px;letter-spacing:-.03em;margin-bottom:6px}
+.sub{color:var(--ink-soft);font-size:14.5px;margin-bottom:22px}
+.login-card label{display:block;font-weight:600;font-size:13.5px;margin:0 0 7px}
+.login-card input{
+  width:100%;background:var(--ice);border:1.5px solid rgba(27,117,188,.14);
+  border-radius:14px;padding:12px 14px;margin-bottom:14px;color:var(--ink);outline:none;
+}
+.login-card input:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(27,117,188,.12)}
+.login-card .btn{width:100%;padding:13px 18px;margin-top:4px}
+.login-err{display:none;color:var(--red);font-weight:600;font-size:13.5px;margin:0 0 10px}
+.login-err.show{display:block}
+.login-note{margin-top:16px;font-size:12.5px;color:var(--ink-soft);line-height:1.55}
+
+.topbar{
+  background:#fff;border-bottom:1px solid rgba(27,117,188,.1);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 28px;position:sticky;top:0;z-index:20;
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand img{height:36px}
+.brand strong{font-family:var(--font-display);font-weight:800;font-size:16px}
+.brand strong b{color:var(--blue)}
+.brand em{
+  font-style:normal;color:var(--ink-soft);font-size:13px;font-weight:600;
+  padding-left:10px;margin-left:4px;border-left:1px solid rgba(11,37,64,.12);
+}
+.who{display:flex;align-items:center;gap:10px}
+.who span{font-size:13.5px;font-weight:600;color:var(--ink-soft)}
+.avatar{
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--sky));
+  color:#fff;display:grid;place-items:center;font-weight:700;font-size:12px;
+}
+.page{padding:28px 28px 40px;max-width:1440px;margin:0 auto}
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.page-head h1{font-family:var(--font-display);font-weight:800;font-size:34px;letter-spacing:-.03em;line-height:1}
+.kicker{color:var(--ink-soft);font-size:13.5px;font-weight:600;margin-top:6px}
+.head-actions,.tweaks{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tweaks{margin-top:10px}
+.tweaks button{
+  background:#fff;border:1px solid rgba(11,37,64,.1);border-radius:999px;
+  padding:6px 12px;font-size:12.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+}
+.tweaks button.on{border-color:var(--blue);color:var(--blue);background:#E8F4FC}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.stat{
+  background:#fff;border-radius:var(--card);padding:16px 18px;box-shadow:var(--shadow);
+  border:1px solid rgba(27,117,188,.08);
+}
+.stat label{display:block;font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-bottom:4px}
+.stat b{font-family:var(--font-num);font-size:28px;font-weight:700;color:var(--blue);line-height:1.1}
+.stat.alert label,.stat.alert b{color:var(--red)}
+body.hide-stats .stats{display:none}
+
+.workspace{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(320px,.95fr);gap:16px;align-items:start}
+.card{background:#fff;border-radius:var(--card);box-shadow:var(--shadow);border:1px solid rgba(27,117,188,.08)}
+.list-card{padding:16px 16px 10px;overflow:hidden}
+.controls{display:grid;grid-template-columns:1.4fr repeat(3,minmax(110px,.7fr));gap:8px;margin-bottom:8px}
+.controls input,.controls select{
+  width:100%;background:var(--ice);border:1.5px solid rgba(27,117,188,.12);
+  border-radius:12px;padding:10px 12px;color:var(--ink);outline:none;
+}
+.controls input:focus,.controls select:focus{border-color:var(--blue);background:#fff}
+.list-meta{display:flex;justify-content:space-between;align-items:center;margin:4px 0 10px;font-size:13px}
+.reset{background:none;border:none;color:var(--red);font-weight:700;cursor:pointer}
+.count{color:var(--ink-soft);font-weight:600}
+
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:separate;border-spacing:0 6px}
+th{
+  text-align:left;font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:700;padding:0 10px 6px;white-space:nowrap;cursor:pointer;user-select:none;
+}
+th .arrow{opacity:.35;margin-left:4px}
+th.active .arrow{opacity:1;color:var(--blue)}
+td{padding:10px;vertical-align:middle}
+tbody tr{cursor:pointer}
+tbody tr td:first-child{border-radius:12px 0 0 12px}
+tbody tr td:last-child{border-radius:0 12px 12px 0}
+tbody tr:hover td{background:#F7FBFE}
+tbody tr.selected td{background:#E8F4FC}
+tbody tr.selected td:first-child{box-shadow:inset 1.5px 0 0 var(--blue), inset 0 1.5px 0 var(--blue), inset 0 -1.5px 0 var(--blue)}
+tbody tr.selected td:last-child{box-shadow:inset -1.5px 0 0 var(--blue), inset 0 1.5px 0 var(--blue), inset 0 -1.5px 0 var(--blue)}
+tbody tr.selected td:not(:first-child):not(:last-child){box-shadow:inset 0 1.5px 0 var(--blue), inset 0 -1.5px 0 var(--blue)}
+
+.person{display:flex;gap:10px;align-items:center;min-width:170px}
+.av{width:36px;height:36px;border-radius:50%;flex:none;background:#D7E8F6;color:var(--blue);display:grid;place-items:center;font-weight:700;font-size:12px}
+.person b{display:flex;align-items:center;gap:6px;font-size:14px}
+.person small,.role-sub,.when small{display:block;color:var(--ink-soft);font-size:12.5px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--red);flex:none}
+.when b{display:block;font-size:13.5px}
+body.compact td{padding:6px 10px}
+body.compact .av{width:30px;height:30px;font-size:11px}
+
+.pill{display:inline-flex;align-items:center;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.pill.new{background:#FDEBEC;color:var(--red)}
+.pill.reviewed{background:#E8F4FC;color:var(--blue)}
+.pill.interview{background:var(--blue);color:#fff}
+.pill.archived{background:#EEF1F4;color:#6A7C8C}
+.pill.yes{background:#E8F4FC;color:var(--blue)}
+.pill.flag{background:#FDEBEC;color:var(--red)}
+.pill.role{background:#E8F4FC;color:var(--blue);border:1px solid rgba(27,117,188,.15);font-weight:600}
+
+.empty{text-align:center;color:var(--ink-soft);padding:40px 16px;font-size:14.5px}
+.detail{display:flex;flex-direction:column;gap:12px;position:sticky;top:72px}
+.detail .card{overflow:hidden}
+
+.hero .ref,.hero .ref{font-size:12px;opacity:.9;font-weight:600;letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hero h2,.hero h2{font-family:var(--font-display);font-size:24px;letter-spacing:-.03em;margin:8px 0 4px}
+.hero .meta,.hero .meta{font-size:13.5px;opacity:.92}
+.actions,.actions{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px 4px}
+.facts,.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 16px 16px}
+.facts label,.facts label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px}
+.facts p,.facts p{font-size:13.5px;word-break:break-word}
+.facts a,.facts a{color:var(--blue);font-weight:600;text-decoration:none}
+.kv,.kv{display:grid;gap:8px}
+.kv div,.kv div{display:flex;justify-content:space-between;gap:12px;font-size:13.5px}
+.kv span,.kv span{color:var(--ink-soft)}
+.kv b,.kv b{text-align:right;font-weight:650}
+.roles,.roles{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.resume-head,.resume-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.resume-head h3,.resume-head h3{margin:0}
+.resume-preview,.resume-preview{border:1px solid rgba(27,117,188,.12);border-radius:14px;overflow:hidden;background:var(--ice)}
+.resume-empty,.resume-empty{padding:28px 16px;text-align:center;color:var(--ink-soft);font-size:13.5px}
+.q-row,.q-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(11,37,64,.06);font-size:13.5px}
+.q-row span,.q-row span{max-width:62%}
+.note-blurb,.note-blurb{background:var(--ice);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--ink-soft);margin:0 0 8px}
+.person,.person{display:flex;gap:10px;align-items:center;min-width:170px}
+.av,.av{width:36px;height:36px;border-radius:50%;flex:none;background:#D7E8F6;color:var(--blue);display:grid;place-items:center;font-weight:700;font-size:12px}
+.person b,.person b{display:flex;align-items:center;gap:6px;font-size:14px}
+.person small,.role-sub,.when small,.person small,.role-sub{display:block;color:var(--ink-soft);font-size:12.5px}
+.head-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.block.empty{text-align:center;color:var(--ink-soft);padding:40px 16px}
+.hero,.hero{background:linear-gradient(135deg,var(--blue),var(--sky));color:#fff;padding:18px}
+.hero .ref{font-size:12px;opacity:.9;font-weight:600;letter-spacing:.04em;text-transform:uppercase;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hero h2{font-family:var(--font-display);font-size:24px;letter-spacing:-.03em;margin:8px 0 4px}
+.hero .meta{font-size:13.5px;opacity:.92}
+.actions{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px 4px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 16px 16px}
+.facts label{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px}
+.facts p{font-size:13.5px;word-break:break-word}
+.facts a{color:var(--blue);font-weight:600;text-decoration:none}
+
+.block{padding:16px 18px 18px}
+.block h3{font-family:var(--font-display);font-size:15px;margin-bottom:12px}
+.roles{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.kv{display:grid;gap:8px}
+.kv div{display:flex;justify-content:space-between;gap:12px;font-size:13.5px}
+.kv span{color:var(--ink-soft)}
+.kv b{text-align:right;font-weight:650}
+.resume-head{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.resume-head h3{margin:0}
+.resume-preview{border:1px solid rgba(27,117,188,.12);border-radius:14px;overflow:hidden;background:var(--ice)}
+.resume-file{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-bottom:1px solid rgba(27,117,188,.1);font-size:13px}
+.ico{width:28px;height:34px;border-radius:4px;background:var(--red);color:#fff;display:grid;place-items:center;font-size:9px;font-weight:800}
+.resume-sheet{padding:18px 16px 22px;background:#fff;margin:12px;border-radius:8px}
+.resume-sheet .nm{font-family:var(--font-display);font-weight:800;margin-bottom:10px}
+.resume-sheet .sec{color:var(--red);font-size:11px;font-weight:800;letter-spacing:.08em;margin:10px 0 6px}
+.bar{height:7px;background:#E4EDF5;border-radius:99px;margin:5px 0}
+.bar.s{width:92%}.bar.m{width:74%}.bar.l{width:58%}
+.resume-empty{padding:28px 16px;text-align:center;color:var(--ink-soft);font-size:13.5px}
+
+.q-row{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid rgba(11,37,64,.06);font-size:13.5px}
+.q-row span{max-width:62%}
+.note-blurb{background:var(--ice);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--ink-soft);margin:0 0 8px}
+.prose{margin-top:14px}
+.prose h4{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:12px 0 6px}
+.prose p{font-size:14px;white-space:pre-wrap}
+.cert{margin-top:14px;padding-top:12px;border-top:1px solid rgba(11,37,64,.08);font-size:12.5px;color:var(--ink-soft)}
+.caveat{margin-top:18px;font-size:12.5px;color:var(--ink-soft);line-height:1.55;max-width:90ch}
+
+#toast{
+  position:fixed;bottom:24px;left:50%;transform:translate(-50%,80px);
+  background:var(--ink);color:#fff;padding:13px 24px;border-radius:999px;
+  font-size:14px;font-weight:500;z-index:99;opacity:0;transition:.4s;pointer-events:none;
+}
+#toast.show{transform:translate(-50%,0);opacity:1}
+
+@media(max-width:1100px){
+  .workspace{grid-template-columns:1fr}
+  .detail{position:static}
+  .controls{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .topbar,.page{padding-left:14px;padding-right:14px}
+  .stats,.controls,.facts{grid-template-columns:1fr}
+  .who span,.brand em{display:none}
+}
+</style>
+</head>
+<body>
+<div id="login">
+  <form class="login-card" id="loginForm">
+    <a class="login-brand" href="index.html"><img src="km-logo.jpg" alt=""><span>Korner<b>Mart</b></span></a>
+    <h1>Hiring inbox</h1>
+    <p class="sub">Sign in with the staff account created in Supabase Auth. There is no public sign-up.</p>
+    <div class="login-err" id="loginErr"></div>
+    <label for="email">Email</label>
+    <input id="email" type="email" autocomplete="username" required>
+    <label for="password">Password</label>
+    <input id="password" type="password" autocomplete="current-password" required>
+    <button class="btn btn-blue" type="submit" id="loginBtn">Sign in</button>
+    <p class="login-note">This page is not linked from the public site. Bookmark it after you sign in. The resume pane is a styled preview — Open full / Download use the real file when one was uploaded.</p>
+  </form>
+</div>
+
+<div id="app" class="hidden">
+  <header class="topbar">
+    <a class="brand" href="applications.html">
+      <img src="km-logo.jpg" alt="KornerMart">
+      <strong>Korner<b>Mart</b></strong>
+      <em>Hiring · Applications</em>
+    </a>
+    <div class="who">
+      <span id="whoEmail"></span>
+      <div class="avatar" id="whoAv"></div>
+      <button class="btn btn-outline" type="button" id="signOut" style="padding:8px 12px;font-size:13px">Sign out</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="page-head">
+      <div>
+        <h1>Applications</h1>
+        <p class="kicker">Applicant tracker</p>
+        <div class="tweaks">
+          <button type="button" id="toggleStats">Hide stats</button>
+          <button type="button" id="toggleDensity">Compact rows</button>
+        </div>
+      </div>
+      <div class="head-actions">
+        <button class="btn btn-outline" type="button" id="exportBtn">Export CSV</button>
+        <a class="btn btn-navy" href="index.html#careers">Manage postings</a>
+      </div>
+    </div>
+
+    <section class="stats" id="stats">
+      <div class="stat"><label>Total applications</label><b id="statTotal">0</b></div>
+      <div class="stat alert"><label>New this week</label><b id="statWeek">0</b></div>
+      <div class="stat"><label>Interviewing</label><b id="statInterview">0</b></div>
+      <div class="stat"><label>With resume</label><b id="statResume">0</b></div>
+    </section>
+
+    <div class="workspace">
+      <section class="card list-card">
+        <div class="controls">
+          <input id="search" type="search" placeholder="Search name, email, position" autocomplete="off">
+          <select id="filterStore"><option value="">All stores</option></select>
+          <select id="filterRole"><option value="">All positions</option></select>
+          <select id="filterStatus">
+            <option value="">All statuses</option>
+            <option>New</option>
+            <option>Reviewed</option>
+            <option>Interview</option>
+            <option>Archived</option>
+          </select>
+        </div>
+        <div class="list-meta">
+          <button class="reset" type="button" id="resetBtn">Reset</button>
+          <span class="count" id="listCount"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th data-key="name">Applicant <span class="arrow">↕</span></th>
+                <th data-key="role">Position <span class="arrow">↕</span></th>
+                <th data-key="store">Store <span class="arrow">↕</span></th>
+                <th data-key="applied" class="active">Applied <span class="arrow">↓</span></th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="empty hidden" id="empty">No applications match these filters.</div>
+      </section>
+      <aside class="detail" id="detail"></aside>
+    </div>
+    <p class="caveat">Staff-only page — not linked from the public site. The resume pane is a styled placeholder, not a live PDF viewer; Open full and Download use a signed file when the applicant uploaded one.</p>
+  </main>
+</div>
+
+<div id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="jobs.js"></script>
+<script src="supabase-config.js"></script>
+<script src="applications.js"></script>
+</body>
+</html>
