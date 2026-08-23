@@ -92,14 +92,8 @@
     return positionsOf(row).length ? 'single role' : '';
   }
   function hoursFor(row) {
-    const types = new Set();
-    const jobs = typeof KM_JOBS !== 'undefined' ? KM_JOBS : [];
-    positionsOf(row).forEach(p => {
-      const title = String(p).replace(/^Other:\s*/i, '').trim();
-      const job = jobs.find(j => j.title === p || j.title.toLowerCase() === title.toLowerCase());
-      if (job && job.type) types.add(job.type);
-    });
-    return [...types].join(', ') || '—';
+    const av = Array.isArray(row.availability) ? row.availability.filter(Boolean) : [];
+    return av.join(', ') || '—';
   }
   function addressOf(row) {
     return [row.address_line1, row.address_line2, [row.city, row.state].filter(Boolean).join(', '), row.zip]
@@ -317,7 +311,7 @@
 
   function exportCsv() {
     const list = filteredList();
-    const cols = ['full_name', 'email', 'phone', 'status', 'positions', 'location_name', 'created_at', 'resume_filename'];
+    const cols = ['full_name', 'email', 'phone', 'status', 'positions', 'availability', 'location_name', 'created_at', 'resume_filename'];
     const lines = [cols.join(',')];
     list.forEach(r => {
       const obj = {
@@ -326,6 +320,7 @@
         phone: r.phone || '',
         status: r.status || 'New',
         positions: positionsOf(r).join('; '),
+        availability: (Array.isArray(r.availability) ? r.availability.filter(Boolean) : []).join('; '),
         location_name: r.location_name || '',
         created_at: r.created_at || '',
         resume_filename: r.resume_filename || ''

@@ -151,7 +151,7 @@ h2.block:first-child{margin-top:0}
 .err{
   display:none;color:var(--red);font-size:13px;font-weight:600;margin-top:6px;
 }
-.field.error .err,.q.error .err,.pos-wrap.error .err,.terms-row.error + .err{display:block}
+.field.error .err,.q.error .err,.pos-wrap.error .err,.avail-wrap.error .err,.terms-row.error + .err{display:block}
 .privacy-notice{
   background:#E8F4FC;border:1px solid rgba(27,117,188,.18);
   border-radius:16px;padding:14px 16px;margin:0 0 8px;
@@ -388,6 +388,22 @@ footer a:hover{color:var(--sky)}
           <input id="other_position" name="other_position" placeholder="Position title">
         </div>
         <div class="err">Please select at least one position.</div>
+      </div>
+
+      <h2 class="block">Availability <span class="req">*</span></h2>
+      <p class="note" style="margin:-8px 0 14px">Select every option that works for you.</p>
+      <div class="avail-wrap">
+        <div class="pos-grid">
+          <label class="pos">
+            <input type="checkbox" name="availability" value="Full-time">
+            <span><b>Full-time</b></span>
+          </label>
+          <label class="pos">
+            <input type="checkbox" name="availability" value="Part-time">
+            <span><b>Part-time</b></span>
+          </label>
+        </div>
+        <div class="err">Please select full-time, part-time, or both.</div>
       </div>
 
       <h2 class="block">Preferred location <span class="req">*</span></h2>
@@ -697,6 +713,11 @@ function validate(){
   setError(posWrap, !posOk);
   if(!posOk){ ok=false; firstBad.push(posWrap); }
 
+  const availChecked = [...document.querySelectorAll('input[name="availability"]:checked')];
+  const availWrap = document.querySelector('.avail-wrap');
+  setError(availWrap, !availChecked.length);
+  if(!availChecked.length){ ok=false; firstBad.push(availWrap); }
+
   document.querySelectorAll('.q[data-radio]').forEach(q=>{
     if(q.id==='contactEmployerQ' && !q.classList.contains('show')) { setError(q,false); return; }
     const name = q.dataset.radio;
@@ -763,8 +784,10 @@ document.getElementById('applyForm').addEventListener('submit', async e=>{
 
     const emptyToNull = v => (v && String(v).trim()) ? String(v).trim() : null;
     const loc = KM_LOCATIONS.find(l=>l.code===document.getElementById('preferred_location').value);
+    const availability = [...document.querySelectorAll('input[name="availability"]:checked')].map(i=>i.value);
     const { error } = await client.from('applications').insert({
       positions,
+      availability,
       other_position: otherCb.checked ? emptyToNull(document.getElementById('other_position').value) : null,
       location_code: loc ? loc.code : null,
       location_name: loc ? loc.city : null,

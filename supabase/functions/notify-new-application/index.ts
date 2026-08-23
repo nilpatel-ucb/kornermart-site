@@ -71,6 +71,7 @@ Deno.serve(async (req) => {
       <table style="border-collapse:collapse;font-size:14px">${
         row("Name", name) +
         row("Position", positions) +
+        row("Availability", Array.isArray(app.availability) && app.availability.length ? app.availability.join(", ") : "") +
         row("Preferred location", location) +
         row("Phone", app.phone) +
         row("Email", app.email) +

@@ -9,6 +9,7 @@ create table if not exists public.applications (
   status text not null default 'New',
 
   positions text[] not null default '{}',
+  availability text[] not null default '{}',
   other_position text,
   location_code text,
   location_name text,
@@ -65,6 +66,9 @@ create table if not exists public.applications (
 
 alter table public.applications
   add column if not exists marketing_opt_in boolean not null default false;
+
+alter table public.applications
+  add column if not exists availability text[] not null default '{}';
 
 create table if not exists public.locations (
   code text primary key,
