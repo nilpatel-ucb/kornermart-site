@@ -1,6 +1,6 @@
 # KornerMart
 
-Static website and hiring pipeline for KornerMart, a family-owned chain of gas stations and convenience stores across Southern Utah. The public site covers who we are, twelve store locations, a coming-soon KM Rewards section, and open roles. Candidates apply once for every position they want; staff review those applications in a private inbox.
+Static website and hiring pipeline for KornerMart, a family-owned chain of gas stations and convenience stores across Southern Utah. The site builds a workflow allowing potential applicants to apply and the hiring manager to keep track of all applicants optimized to their spcific needs. 
 
 Live site: [kornermart.com](https://kornermart.com)
 
@@ -30,11 +30,11 @@ Live site: [kornermart.com](https://kornermart.com)
 
 Work went in this order:
 
-1. **Public marketing site** — floating nav, hero with sample fuel prices, Who We Are, a location grid with directions, KM Rewards (coming soon, with a points calculator), and a Careers section that lists every opening.
-2. **Employment application** — `apply.html` collects contact info, address, roles, availability, preferred store, optional resume, screening questions, education, and employment history.
-3. **Legal pages** — Privacy Policy and Terms & Conditions, linked from the apply form and the site footer.
-4. **Supabase backend** — `applications` and `locations` tables, row-level security, and a private `resumes` storage bucket.
-5. **Staff hiring inbox** — password login, applicant list, detail pane, status changes, resume download, and CSV export.
+1. **Public site**: regarding information of who and what KornerMart is.
+2. **Employment application**: `apply.html` collects contact info, address, roles, availability, preferred store, optional resume, screening questions, education, and employment history of potential employees building KornerMarts application pipeline.
+3. **Legal pages**: Privacy Policy and Terms & Conditions, linked from the apply form and the site footer.
+4. **Supabase backend**: `applications` and `locations` tables, row-level security, and a private `resumes` storage bucket.
+5. **Staff hiring portal**: allows for authorized staff via Supabase to access hiring portal. 
 6. **Email alerts** — a Supabase Edge Function formats each new application and sends it through Resend to `kornermart@gmail.com`.
 
 Jobs and stores live in one shared file (`jobs.js`) so the homepage, apply form, and database stay in sync.
