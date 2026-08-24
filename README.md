@@ -20,6 +20,10 @@ Live site: [kornermart.com](https://kornermart.com)
 
 ![Application questions](Images/KM%20-%20Application%20Questions.png)
 
+**Application email** — each new submission emails hiring with the same summary, a resume link, and a button into the inbox.
+
+![Application email notification](Images/KM%20-%20Application%20Email%20Notification.png)
+
 ---
 
 ## What I built
@@ -125,6 +129,8 @@ Never put the `service_role` key in frontend files. The browser only gets the an
 ## New-application email
 
 [`supabase/functions/notify-new-application`](supabase/functions/notify-new-application/index.ts) builds an HTML email that matches the inbox: contact, positions, resume link, questions, education, and a button to open the hiring inbox.
+
+![Application email notification](Images/KM%20-%20Application%20Email%20Notification.png)
 
 Typical wiring:
 
