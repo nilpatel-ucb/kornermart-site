@@ -22,7 +22,7 @@ Live site: [kornermart.com](https://kornermart.com)
 
 ---
 
-## What we built
+## What I built
 
 Work went in this order:
 
@@ -37,28 +37,6 @@ Jobs and stores live in one shared file (`jobs.js`) so the homepage, apply form,
 
 ---
 
-## How hiring works
-
-```mermaid
-flowchart LR
-  Site[Public site] --> Apply[apply.html]
-  Apply -->|resume PDF or Word| Bucket[resumes bucket]
-  Apply -->|application row| DB[(applications)]
-  DB -->|insert webhook| Fn[notify-new-application]
-  Fn --> Email[Resend email]
-  Staff[Staff sign-in] --> Inbox[applications.html]
-  Inbox --> DB
-  Inbox --> Bucket
-```
-
-1. A candidate opens **Apply now** from Careers (or a specific role, which pre-checks that job on the form).
-2. The browser talks to Supabase with the public anon key. The resume goes into a private bucket; the rest of the form becomes one row in `applications`.
-3. An insert webhook calls `notify-new-application`, which emails the hiring inbox a formatted summary plus a 7-day signed resume link.
-4. Staff open `/applications.html` (not linked from the public site), sign in, and work the list: New → Reviewed → Interview, or Archive.
-
-Anonymous visitors can **insert** applications and **upload** resumes. They cannot read other people’s rows or files. Only an authenticated staff user can list applications, update status, and open resumes.
-
----
 
 ## Public website
 
@@ -156,40 +134,7 @@ Typical wiring:
 
 The function loads the full row with the service role (server-side only) so the email can include a signed resume URL.
 
----
 
-## Project files
-
-```
-index.html              Public homepage
-apply.html              Employment application
-applications.html       Staff inbox shell
-applications.js         Inbox login, list, detail, status, CSV
-jobs.js                 Shared openings and store list
-privacy.html            Privacy Policy
-terms.html              Terms & Conditions
-supabase-config.js      Live anon URL + key (do not add service_role)
-supabase-config.example.js
-supabase/schema.sql     Tables, RLS, storage policies
-supabase/functions/notify-new-application/
-Images/                 Product screenshots used in this README
-```
-
----
-
-## Local setup
-
-The site is static HTML, CSS, and JS. Open the files locally or serve the folder (any static host, including GitHub Pages or the current kornermart.com host).
-
-1. Copy `supabase-config.example.js` to `supabase-config.js`.
-2. Paste the project URL and **anon / publishable** key from Supabase → Project Settings → API Keys.
-3. Run `supabase/schema.sql` against the project if tables are not already there.
-4. Create a staff user in Authentication → Users (email + password). That account is what signs into the hiring inbox.
-5. Deploy `notify-new-application` and attach the insert webhook if email alerts should keep running.
-
-To add or rename a job or store, edit `jobs.js` and, for stores, keep `locations` in `schema.sql` in agreement so the foreign key still matches.
-
----
 
 ## Stack
 
