@@ -8,19 +8,19 @@ Live site: [kornermart.com](https://kornermart.com)
 
 ## Screenshots
 
-**Employment application** — one form, multiple roles, privacy notice at the top.
+**Employment application**: A singular form for muliple locations.
 
 ![Employment application](Images/KM%20-%20Applications%20Pagge.png)
 
-**Hiring inbox** — signed-in staff see counts, filters, and a selected applicant on the right.
+**Hiring Portal**: A secure platform allowing signed-in staff to see counts, filters, and a selected applicant allowing a organized flow. 
 
 ![Hiring inbox](Images/KM%20-%20Applications%20Portal.png)
 
-**Application questions** — yes/no answers sit next to the list. Answers that need a closer look (for example a criminal-history “Yes”) show in red.
+**Application questions**: yes/no answers sit next to the list. Answers that need a closer look (for example a criminal-history “Yes”) show in red.
 
 ![Application questions](Images/KM%20-%20Application%20Questions.png)
 
-**Application email** — each new submission emails hiring with the same summary, a resume link, and a button into the inbox.
+**Application email**: each new submission emails hiring with the same summary, a resume link, and a button into the inbox.
 
 ![Application email notification](Images/KM%20-%20Application%20Email%20Notification.png)
 
@@ -35,7 +35,7 @@ Work went in this order:
 3. **Legal pages**: Privacy Policy and Terms & Conditions, linked from the apply form and the site footer.
 4. **Supabase backend**: `applications` and `locations` tables, row-level security, and a private `resumes` storage bucket.
 5. **Staff hiring portal**: allows for authorized staff via Supabase to access hiring portal. 
-6. **Email alerts** — a Supabase Edge Function formats each new application and sends it through Resend to `kornermart@gmail.com`.
+6. **Email alerts**: a Supabase Edge Function formats each new application and sends it through Resend to `kornermart@gmail.com`.
 
 Jobs and stores live in one shared file (`jobs.js`) so the homepage, apply form, and database stay in sync.
 
@@ -53,8 +53,6 @@ Jobs and stores live in one shared file (`jobs.js`) so the homepage, apply form,
 | Locations | Twelve stores from `jobs.js`, each with a Maps directions link |
 | KM Rewards | Coming soon — Member / KM Plus / KM Fleet tiers and a gallons-per-week calculator |
 | Careers | Role cards that deep-link into `apply.html?job=…` |
-
-The page uses the KM blue/red palette (Sora + Instrument Sans), a glass nav, and a decorative bubble canvas. Rewards enrollment buttons toast “coming soon” instead of collecting sign-ups.
 
 ---
 
@@ -76,7 +74,7 @@ On success the form is replaced with a thank-you that repeats the roles, store, 
 
 ---
 
-## Hiring inbox
+## Application Portal
 
 `applications.html` + `applications.js` is the staff tool. There is no public sign-up; accounts are created in the Supabase Auth dashboard.
 
@@ -88,7 +86,7 @@ What staff can do:
 - Open a row to read contact info, roles, availability, questions, education, and certification
 - Opening a **New** row marks it **Reviewed**
 - **Move to interview**, **Archive**, or **Email** (mailto with the role in the subject)
-- Open or download the real resume via a short-lived signed URL (the on-screen resume card is a styled preview, not a live PDF)
+- Open or download the real resume via a short-lived signed URL
 - Export the current filtered list as CSV
 
 Statuses: **New** → **Reviewed** → **Interview**, or **Archived**.
@@ -144,7 +142,7 @@ The function loads the full row with the service role (server-side only) so the 
 
 ## Stack
 
-- Static HTML / CSS / JS (no build step)
+- Static HTML / CSS / JS 
 - [Supabase](https://supabase.com) — Postgres, Auth, Storage, Edge Functions
 - [supabase-js](https://github.com/supabase/supabase-js) from CDN on apply + inbox pages
 - [Resend](https://resend.com) for hiring emails
