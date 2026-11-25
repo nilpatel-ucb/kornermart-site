@@ -132,28 +132,6 @@ h1 .grad-red{background:linear-gradient(120deg,var(--red),var(--red-deep));-webk
 }
 .btn-ghost:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
 
-/* fuel board */
-.fuel-board{
-  margin-top:64px;
-  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
-}
-.fuel-chip{
-  background:rgba(255,255,255,.8);
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(27,117,188,.14);
-  border-radius:22px;
-  padding:16px 26px;
-  min-width:150px;
-  box-shadow:var(--shadow);
-  transition:transform .25s,border-color .25s;
-}
-.fuel-chip:hover{transform:translateY(-5px);border-color:var(--sky)}
-.fuel-chip .grade{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
-.fuel-chip .price{font-family:var(--font-num);font-weight:700;font-size:30px;color:var(--blue);line-height:1.2}
-.fuel-chip .price sup{font-size:.5em;color:var(--red)}
-.fuel-chip.diesel .price{color:var(--red)}
-.fuel-note{margin-top:14px;font-size:12.5px;color:var(--ink-soft)}
-
 .scroll-hint{
   position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
   color:var(--ink-soft);font-size:12px;letter-spacing:.15em;text-transform:uppercase;
@@ -427,14 +405,6 @@ footer a:hover{color:var(--sky)}
       <a class="btn btn-primary" href="#locations">Find a store</a>
       <a class="btn btn-ghost" href="#rewards">KM Rewards</a>
     </div>
-
-    <div class="fuel-board" aria-label="Today's fuel prices">
-      <div class="fuel-chip"><div class="grade">Regular 87</div><div class="price">$4.29<sup>9</sup></div></div>
-      <div class="fuel-chip"><div class="grade">Plus 89</div><div class="price">$4.49<sup>9</sup></div></div>
-      <div class="fuel-chip"><div class="grade">Premium 91</div><div class="price">$4.69<sup>9</sup></div></div>
-      <div class="fuel-chip diesel"><div class="grade">Diesel</div><div class="price">$4.89<sup>9</sup></div></div>
-    </div>
-    <div class="fuel-note">Sample prices for illustration. Check the pump at your local KornerMart for today’s price.</div>
 
     <div class="scroll-hint">Scroll ↓</div>
   </section>
